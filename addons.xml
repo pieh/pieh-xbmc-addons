@@ -1,3 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
+<addon id="script.module.rssengine" name="RSS Engine Addon"
+       version="0.0.1"
+       provider-name="tajemniczy bart">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="script.rssclient"
+       name="RSS Client Background"
+       version="0.0.2"
+       provider-name="pieh">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+    <import addon="xbmcgui" />
+    <import addon="script.rss.editor" />
+    <import addon="plugin.video.youtube" />
+    <import addon="script.module.rssengine" version="0.0.1" />
+  </requires>
+  <extension point="xbmc.python.script"
+             library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">RSS Client</summary>
+    <description lang="en">rss client [...]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="script.rssclient-standalone"
+       name="RSS Client"
+       version="0.0.2"
+       provider-name="pieh">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+    <import addon="xbmcgui" />
+    <import addon="script.rss.editor" />
+    <import addon="plugin.video.youtube" />
+    <import addon="script.module.rssengine" version="0.0.1" />
+  </requires>
+  <extension point="xbmc.python.script"
+             library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">RSS Client</summary>
+    <description lang="en">rss client [...]</description>
+    <platform>all</platform>
+  </extension>
+</addon>
 </addons>

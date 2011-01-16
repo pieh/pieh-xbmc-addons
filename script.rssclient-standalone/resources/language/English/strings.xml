@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<strings>
+    <string id="30005">All Channels</string>
+    <string id="30001">Group by chan.</string>
+    <string id="30002">Edit feeds</string>
+    <string id="30003">Set chan. as read</string>
+    <string id="30009">Go to settings</string>
+    
+    <string id="30004">Press 'P' to play the video</string>
+    <string id="30006">Press 'I' to watch slideshow</string>
+    
+    
+    <!-- settings -->
+    <string id="30100">Basic settings</string>
+    <string id="30101">Extract images from HTML tags</string>
+    <string id="30102">Enable image caching (required for slideshows)</string>
+</strings>

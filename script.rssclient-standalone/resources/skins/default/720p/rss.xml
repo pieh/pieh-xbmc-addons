@@ -1,0 +1,449 @@
+<window>
+	<defaultcontrol always="true">30050</defaultcontrol>
+	<controls>
+		<control type="image">
+			<posx>10</posx>
+			<posy>400</posy>
+			<width>620</width>
+			<height>310</height>
+			<texture>ContentPanel.png</texture>
+		</control>
+		<control type="image">
+			<posx>650</posx>
+			<posy>400</posy>
+			<width>620</width>
+			<height>310</height>
+			<texture>ContentPanel.png</texture>
+		</control>
+		<control type="image">
+			<posx>10</posx>
+			<posy>40</posy>
+			<width>1260</width>
+			<height>350</height> 
+			<texture>ContentPanel.png</texture>
+		</control>
+
+		<control type="image">
+			<posx>300</posx>
+			<posy>60</posy>
+			<width>650</width>
+			<height>320</height> 
+			<texture>ContentPanel.png</texture>
+			<visible>Skin.HasSetting(ShowText)</visible>
+		</control>
+		
+		<control type="list" id="30050"> 
+			<description>items</description>
+			<posx>670</posx>
+			<posy>420</posy>
+			<width>580</width>
+			<height>270</height>
+			<visible>true</visible>
+			<onleft>30051</onleft>
+			<onright>39003</onright>
+			<viewtype label="3D list">list</viewtype>
+			<orientation>vertical</orientation>
+			<pagecontrol>-</pagecontrol>
+			<scrolltime>200</scrolltime>
+			<itemlayout width="580" height="40">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>580</width>
+					<height>41</height>
+					<texture border="0,2,0,2">MenuItemNF.png</texture>
+				</control>
+				<control type="label">
+					<posx>10</posx>
+					<posy>0</posy>
+					<width>520</width>
+					<height>40</height>
+					<selectedcolor>selected</selectedcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+					<textcolor>FFFFFFFF</textcolor>
+				</control>
+				<control type="image">
+					<posx>528</posx>
+					<posy>14</posy>
+					<width>20</width>
+					<height>16</height>
+					<texture>OverlayWatched.png</texture>
+					<visible>ListItem.Property(read)</visible>
+				</control>
+			</itemlayout>
+			<focusedlayout height="40" width="580">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>580</width>
+					<height>41</height>
+					<texture border="0,2,0,2">MenuItemNF.png</texture>
+					<visible>!Control.HasFocus(30050)</visible>
+				</control>
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>580</width>
+					<height>41</height>
+					<texture border="0,2,0,2">MenuItemFO.png</texture>
+					<visible>Control.HasFocus(30050)</visible>
+				</control>
+				<control type="image">
+					<posx>370</posx>
+					<posy>5</posy>
+					<width>200</width>
+					<height>31</height>
+					<texture border="0,0,14,0">MediaItemDetailBG.png</texture>
+				</control>
+				<control type="label">
+					<posx>10</posx>
+					<posy>0</posy>
+					<width>520</width>
+					<height>40</height>
+					<selectedcolor>selected</selectedcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+					<textcolor>FFFFFFFF</textcolor>
+				</control>
+				<control type="image">
+					<posx>528</posx>
+					<posy>14</posy>
+					<width>20</width>
+					<height>16</height>
+					<texture>OverlayWatched.png</texture>
+					<visible>ListItem.Property(read)</visible>
+				</control>
+			</focusedlayout>
+		</control>
+		<control type="list" id="30051">
+			<description>channel</description>
+			<posx>30</posx>
+			<posy>420</posy>
+			<width>580</width>
+			<height>270</height>
+			<visible>true</visible>
+			<onleft>39003</onleft>
+			<onright>30050</onright>
+			<viewtype label="3D list #2">list</viewtype>
+			<orientation>vertical</orientation>
+			<pagecontrol>25</pagecontrol>
+			<scrolltime>200</scrolltime>
+			<itemlayout width="580" height="40">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>580</width>
+					<height>41</height>
+					<texture border="0,2,0,2">MenuItemNF.png</texture>
+				</control>
+				<control type="label">
+					<posx>10</posx>
+					<posy>0</posy>
+					<width>520</width>
+					<height>40</height>
+					<selectedcolor>selected</selectedcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+					<textcolor>FFFFFFFF</textcolor>
+				</control>
+				<control type="image">
+					<posx>528</posx>
+					<posy>14</posy>
+					<width>20</width>
+					<height>16</height>
+					<texture>OverlayWatched.png</texture>
+					<visible>ListItem.Property(read)</visible>
+				</control>
+			</itemlayout>
+			<focusedlayout height="40" width="580">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>580</width>
+					<height>41</height>
+					<texture border="0,2,0,2">MenuItemNF.png</texture>
+					<visible>!Control.HasFocus(30050)</visible>
+				</control>
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>580</width>
+					<height>41</height>
+					<texture border="0,2,0,2">MenuItemFO.png</texture>
+					<visible>Control.HasFocus(30051)</visible>
+				</control>
+				<control type="image">
+					<posx>370</posx>
+					<posy>5</posy>
+					<width>200</width>
+					<height>31</height>
+					<texture border="0,0,14,0">MediaItemDetailBG.png</texture>
+				</control>
+				<control type="label">
+					<posx>10</posx>
+					<posy>0</posy>
+					<width>520</width>
+					<height>40</height>
+					<selectedcolor>selected</selectedcolor>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>$INFO[ListItem.Label]</label>
+					<textcolor>FFFFFFFF</textcolor>
+				</control>
+				<control type="image">
+					<posx>528</posx>
+					<posy>14</posy>
+					<width>20</width>
+					<height>16</height>
+					<texture>OverlayWatched.png</texture>
+					<visible>ListItem.Property(read)</visible>
+				</control>
+			</focusedlayout>
+		</control>
+		
+		<control type="label" id="30008">
+			<posx>1240</posx>
+			<posy>340</posy>
+			<width>1200</width>
+			<height>310</height>
+			<aligny>top</aligny>
+			<align>right</align>
+			<label>$INFO[Container(30050).ListItem(0).Property(date)]</label>
+			<visible>!StringCompare(Container(30050).ListItem.Property(date),N/A)</visible>
+			<wrapmultiline>true</wrapmultiline>
+			<textcolor>FFFFFFFF</textcolor>
+		</control>
+		<control type="label" >
+			<posx>00</posx>
+			<posy>340</posy>
+			<width>1280</width>
+			<height>310</height>
+			<aligny>top</aligny>
+			<align>center</align>
+			<label>$ADDON[script.rssclient-standalone 30004]</label>
+			<visible>!StringCompare(Container(30050).ListItem.Property(video),) + !Container(30050).ListItem.Property(slideshowable)</visible>
+			<textcolor>FFFFFFFF</textcolor>
+		</control>
+		<control type="label" >
+			<posx>00</posx>
+			<posy>340</posy>
+			<width>1280</width>
+			<height>310</height>
+			<aligny>top</aligny>
+			<align>center</align>
+			<label>$ADDON[script.rssclient-standalone 30006]</label>
+			<visible>Container(30050).ListItem.Property(slideshowable) + StringCompare(Container(30050).ListItem.Property(video),)</visible>
+			<textcolor>FFFFFFFF</textcolor>
+		</control>		
+		
+		<control type="label" >
+			<posx>00</posx>
+			<posy>340</posy>
+			<width>1280</width>
+			<height>310</height>
+			<aligny>top</aligny>
+			<align>center</align>
+			<label>$ADDON[script.rssclient-standalone 30004] | $ADDON[script.rssclient-standalone 30006]</label>
+			<visible>Container(30050).ListItem.Property(slideshowable) + !StringCompare(Container(30050).ListItem.Property(video),)</visible>
+			<textcolor>FFFFFFFF</textcolor>
+		</control>	
+		<control type="label" id="30004">
+			<posx>40</posx>
+			<posy>340</posy>
+			<width>1200</width>
+			<height>310</height>
+			<aligny>top</aligny>
+			<align>left</align>
+			<label>$INFO[Container(30050).ListItem(0).Property(channeltext)]</label>
+			<wrapmultiline>true</wrapmultiline>
+			<textcolor>FFFFFFFF</textcolor>
+		</control>
+		
+		<control type="textbox" id="30009">
+			<posx>40</posx>
+			<posy>60</posy>
+			<width>1200</width>
+			<height>268</height>
+			<aligny>top</aligny>
+			<align>left</align>
+			<autoscroll time="3000" delay="4000" repeat="5000">True</autoscroll>
+			<label>$INFO[Container(30050).ListItem(0).Property(desc)]</label>
+			<textcolor>FFFFFFFF</textcolor>
+			<spincolor>FFFFFFFF</spincolor>
+			<visible>StringCompare(Container(30050).ListItem.Property(image),)</visible>
+		</control>
+		<control type="textbox" id="30010">
+			<posx>40</posx>
+			<posy>60</posy>
+			<width>980</width>
+			<height>268</height>
+			<aligny>top</aligny>
+			<align>left</align>
+			<autoscroll time="3000" delay="4000" repeat="5000">True</autoscroll>
+			<label>$INFO[Container(30050).ListItem(0).Property(desc)]</label>
+			<textcolor>FFFFFFFF</textcolor>
+			<spincolor>FFFFFFFF</spincolor>
+			<visible>!StringCompare(Container(30050).ListItem(0).Property(image),)</visible>
+		</control>
+		<control type="image" id="30011">
+			<posx>1040</posx>
+			<posy>60</posy>
+			<width>200</width>
+			<height>310</height>
+			<texture>$INFO[Container(30050).ListItem(0).Property(image)]</texture>
+			<aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+			<visible>!Container(30050).ListItem.Property(slideshowable)</visible>
+		</control>
+		<control type="multiimage" id="30012">
+			<posx>1040</posx>
+			<posy>60</posy>
+			<width>200</width>
+			<height>310</height>
+			<imagepath>$INFO[Container(30050).ListItem(0).Property(multiimagepath)]</imagepath>
+			<aspectratio scalediffuse="false" align="left" aligny="top">keep</aspectratio>
+			<timeperimage>2000</timeperimage>
+			<fadetime>1000</fadetime>
+			<pauseatend>5000</pauseatend>
+			<randomize>false</randomize>
+			<loop>yes</loop>
+			<visible>Container(30050).ListItem.Property(slideshowable)</visible>
+		</control>	
+		
+		<control type="group" id="30005">
+			<posx>-240</posx>
+			<posy>0</posy>
+
+			<animation effect="slide" start="0,0" end="240,0" time="400" >Focus</animation>
+			<animation effect="slide" start="240,0" end="0,0" time="400" >Unfocus</animation>			
+			
+			<control type="image" >
+				<posx>-5</posx>
+				<posy>0</posy>
+				<width>256</width>
+				<height>720</height>
+				<texture>MediaBladeSub.png</texture>
+			</control>
+			<control type="button" id="39003">
+				<description>Sort by button</description>
+				<posx>0</posx>
+				<posy>40</posy>
+				<onright>39004</onright>
+				<onleft>30050</onleft>
+				<ondown>39007</ondown>
+				<onup>39009</onup>
+				<label>103</label>
+				<textcolor>FFFFFFFF</textcolor>
+				<height>40</height>
+				<width>250</width>
+				<textoffsetx>10</textoffsetx>
+				<textwidth>235</textwidth>
+				<texturefocus border="5">button-focus.png</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<pulseonselect>false</pulseonselect>
+		
+			</control>
+			<control type="togglebutton" id="39004">
+				<description>Sort order</description>
+				<posx>220</posx>
+				<posy>53</posy>
+				<label>-</label>
+				<onright>30051</onright>
+				<onleft>39003</onleft>
+				<ondown>39007</ondown>
+				<onup>39008</onup>
+				
+				<width>20</width>
+				<height>20</height>
+				<texturefocus>scroll-up-focus.png</texturefocus>
+				<texturenofocus>scroll-up.png</texturenofocus>
+				<alttexturefocus>scroll-down-focus.png</alttexturefocus>
+				<alttexturenofocus>scroll-down.png</alttexturenofocus>
+			</control>
+			
+			<control type="radiobutton" id="39007">
+				<description>group by chan.</description>
+				<posx>0</posx>
+				<posy>80</posy>
+				<onright>30051</onright>
+				<onleft>30050</onleft>
+				<ondown>39008</ondown>
+				<onup>39003</onup>
+				<textcolor>FFFFFFFF</textcolor>
+				<radiowidth>24</radiowidth>
+				<radioheight>24</radioheight>
+				<textureradiofocus>radiobutton-focus.png</textureradiofocus>
+				<textureradionofocus>radiobutton-nofocus.png</textureradionofocus>
+				<height>40</height>
+				<width>250</width>
+				<textoffsetx>10</textoffsetx>
+				<textwidth>235</textwidth>
+				<texturefocus border="5">button-focus.png</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<pulseonselect>false</pulseonselect>
+
+				<label>$ADDON[script.rssclient-standalone 30001]</label>
+			</control>
+			<control type="button" id="39008">
+				<description>Edit feeds</description>
+				<posx>0</posx>
+				<posy>120</posy>
+				<onright>30051</onright>
+				<onleft>30050</onleft>
+				<ondown>39009</ondown>
+				<onup>39007</onup>
+				<height>40</height>
+				<width>250</width>
+				<textoffsetx>10</textoffsetx>
+				<textwidth>235</textwidth>
+				<texturefocus border="5">button-focus.png</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<pulseonselect>false</pulseonselect>
+				<label>$ADDON[script.rssclient-standalone 30002]</label>
+				<onclick>RunScript(script.rss.editor)</onclick>
+				<textcolor>FFFFFFFF</textcolor>
+			</control>
+			<control type="button" id="39009">
+				<description>set as read </description>
+				<posx>0</posx>
+				<posy>160</posy>
+				<onright>30051</onright>
+				<onleft>30050</onleft>
+				<ondown>39010</ondown>
+				<onup>39008</onup>
+				<label>$ADDON[script.rssclient-standalone 30003]</label>
+				<textcolor>FFFFFFFF</textcolor>
+				<height>40</height>
+				<width>250</width>
+				<textoffsetx>10</textoffsetx>
+				<textwidth>235</textwidth>
+				<texturefocus border="5">button-focus.png</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<pulseonselect>false</pulseonselect>
+			</control>
+			
+			<control type="button" id="39010">
+				<description>set as read </description>
+				<posx>0</posx>
+				<posy>200</posy>
+				<onright>30051</onright>
+				<onleft>30050</onleft>
+				<ondown>39003</ondown>
+				<onup>39009</onup>
+				<label>$ADDON[script.rssclient-standalone 30009]</label>
+				<onclick>ActivateWindow(addonsettings,script.rssclient-standalone)</onclick>
+				<textcolor>FFFFFFFF</textcolor>
+				<height>40</height>
+				<width>250</width>
+				<textoffsetx>10</textoffsetx>
+				<textwidth>235</textwidth>
+				<texturefocus border="5">button-focus.png</texturefocus>
+				<texturenofocus>-</texturenofocus>
+				<pulseonselect>false</pulseonselect>
+			</control>
+		</control>
+	</controls>
+</window>

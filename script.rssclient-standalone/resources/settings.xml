@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+   <setting type="lsep" label="30100" />
+   
+   <setting id="htmlimg" type="bool" label="30101" default="false"/>
+   <setting id="imagecaching" type="bool"  label="30102" default="false" />
+</settings> 
