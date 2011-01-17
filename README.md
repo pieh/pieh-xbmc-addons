@@ -8,4 +8,4 @@ Standalone RSS Client. Provides dedicated GUI for browsing through RSS Feeds. Al
 
 ## RSS Client Background
 
-Addon meant to run in background (like RecentlyAdded script). It allows including RSS feeds into skins (to Home window for instance). 
+Addon meant to run in background (like RecentlyAdded script). It allows including RSS feeds into skins (to Home window for instance). For info go to [How To](http://github.com/pieh/pieh-xbmc-addons/blob/master/howto.md)
