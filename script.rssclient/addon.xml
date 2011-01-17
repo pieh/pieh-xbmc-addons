@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.rssclient"
        name="RSS Client Background"
-       version="1.0.2"
+       version="1.0.0"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
     <import addon="xbmcgui" />
     <import addon="script.rss.editor" />
     <import addon="plugin.video.youtube" />
-    <import addon="script.module.rssengine" version="1.0.1" />
+    <import addon="script.module.rssengine" version="1.0.0" />
   </requires>
   <extension point="xbmc.python.script"
              library="default.py" />
