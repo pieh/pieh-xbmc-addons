@@ -148,9 +148,9 @@ To display item's I've used Group Control (Explanation of <onclick>Control.SetFo
 	
 This skeleton code allow to display item's details and play attached media / show images slideshow. Now lets show user some item details - let's create more controls (labels, textboxes, images) to above Group Control:
 
-	<label>$INFO[Container(XXX).ListItem.Label] - displaying current item header</label>
-	<label>$INFO[Container(XXX).ListItem.Label2] - displaying current item text</label>
-	<label>$INFO[Container(XXX).ListItem.Icon] - current item image url (empty if there is no image)</label>
+	<label>$INFO[Container(XXX).ListItem.Label]</label> - displaying current item header
+	<label>$INFO[Container(XXX).ListItem.Label2]</label> - displaying current item text
+	<label>$INFO[Container(XXX).ListItem.Icon]</label> - current item image url (empty if there is no image)
 	<label>$INFO[Window.Property(RSS.Date)]</label> - current item date
 	<label>$INFO[Window.Property(RSS.Channel)]</label> - current item channel
 	<visible>Window.Property(RSS.SlideShowable)</visible> - check if we can use MultiImage control or Slideshow 
