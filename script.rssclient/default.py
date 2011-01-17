@@ -281,7 +281,7 @@ class BackgroundRSSReaderReadSets(Thread):
                     if len(item.video) > 1:
                         okno.setProperty('%sRSS.%d.Media' % (prefix, c), item.video)
                     else:
-                        okno.setProperty('%sRSS.%d.Media' % (prefix, c), 'none')
+                        okno.setProperty('%sRSS.%d.Media' % (prefix, c), '')
                     
                     
                     okno.setProperty('%sRSS.%d.Date' % (prefix, c), item.date.replace(',', '.'))
