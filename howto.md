@@ -13,11 +13,12 @@ Full run code:
 	<onfocus>XBMC.RunScript(script.rssclient,feed=FEED_URL,imagecaching=TRUE|FALSE,htmlimg=TRUE|FALSE,limit=15,prefix=PREFIX)</onfocus>
 	
 Params:
-1. feed - url to RSS feed
+
+1. feed - url to RSS feed.
 2. imagecaching - if set to true script will download images to userdata/Thumbnails/RSS directory. This enables usage of slideshow and multiimage control.
-3. htmlimg - if enabled script will extract images from HTML image tags
-4. limit - how much items to fetch
-5. prefix - this is useful if You want to provide multiple feeds to multiple containers (lists) - it allows to distinguish between items from different feeds by adding prefix to them
+3. htmlimg - if enabled script will extract images from HTML image tags.
+4. limit - how much items to fetch.
+5. prefix - this is useful if You want to provide multiple feeds to multiple containers (lists) - it allows to distinguish between items from different feeds by adding prefix to them.
 
 ## How to use data
 
@@ -32,6 +33,7 @@ or (if prefix was specified):
 where x is number of RSS item
 
 Properties are:
+
 1. Title (RSS.1.Title) - title of the item.
 2. Desc (RSS.1.Desc) - description (text) of the item.
 3. Date (RSS.1.Date) - publish date of item.
@@ -42,3 +44,4 @@ Properties are:
 8. Image.X (RSS.1.Image.1) - url of Xth image attached to item (range from 1 to ImageCount, including ImageCount).
 9. SlideShowable (RSS.1.SlideShowable) - if set to true it means we can use MultiImage control or builtin Slideshow function (ImageCaching must be enabled and item must have at least 2 images).
 10. MultiImagePath (RSS.1.MultiImagePath) - path to directory containing images attached to item (usege in MultiImage control or Slideshow builtin), this property is set only of SlideShowable is set to true.
+
