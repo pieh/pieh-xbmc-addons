@@ -54,44 +54,43 @@ There is also one more global property:
 1. Self written onclick (or onfocus) actions (fast, only properties that skinner will use will be set)
 
 	
-	<control type="list" id="XXX">
-		[...] <- list parameters, etc.
-		<content>
-			<item id="1">
-				<label>$INFO[Window.Property(RSS.1.Title)]</label>
-				<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
-				**<onclick>SetProperty(RSS.Date,&quot;$INFO[Window.Property(RSS.1.Date)]&quot;)</onclick>**
-				**<onclick>SetProperty(RSS.Channel,&quot;$INFO[Window.Property(RSS.1.Channel)]&quot;)</onclick>**
-				**<onclick>SetProperty(RSS.Media,&quot;$INFO[Window.Property(RSS.1.Media)]&quot;)</onclick>**
-				**<onclick>SetProperty(RSS.SlideShowable,&quot;$INFO[Window.Property(RSS.1.SlideShowable)]&quot;)</onclick>**
-				**<onclick>SetProperty(RSS.MultiImagePath,&quot;$INFO[Window.Property(RSS.1.MultiImagePath)]&quot;)</onclick>**
-				<onclick>Control.SetFocus(30002)</onclick>
-				<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
-				<thumb>-</thumb>
-				<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
-			</item>
-			[...] - rest of items
-		</content>
-	</control>
+		<control type="list" id="XXX">
+			[...] <- list parameters, etc.
+			<content>
+				<item id="1">
+					<label>$INFO[Window.Property(RSS.1.Title)]</label>
+					<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
+					<onclick>SetProperty(RSS.Date,&quot;$INFO[Window.Property(RSS.1.Date)]&quot;)</onclick>
+					<onclick>SetProperty(RSS.Channel,&quot;$INFO[Window.Property(RSS.1.Channel)]&quot;)</onclick>
+					<onclick>SetProperty(RSS.Media,&quot;$INFO[Window.Property(RSS.1.Media)]&quot;)</onclick>
+					<onclick>SetProperty(RSS.SlideShowable,&quot;$INFO[Window.Property(RSS.1.SlideShowable)]&quot;)</onclick>
+					<onclick>SetProperty(RSS.MultiImagePath,&quot;$INFO[Window.Property(RSS.1.MultiImagePath)]&quot;)</onclick>
+					<onclick>Control.SetFocus(30002)</onclick>
+					<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
+					<thumb>-</thumb>
+					<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
+				</item>
+				[...] - rest of items
+			</content>
+		</control>
 
-2. Using SettingScript to do the job (slower, as XBMC must find it, load it and finally execute it)
+2. Using SettingScript to do the job (slower, as XBMC must find it, load it and finally execute it) - good 
 
-	b
-	<control type="list" id="XXX">
-		[...] <- list parameters, etc.
-		<content>
-			<item id="1">
-				<label>$INFO[Window.Property(RSS.1.Title)]</label>
-				<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
-				**<onclick>XBMC.RunScript($INFO[Window.Property(SettingScript)],id=1)</onclick>**
-				<onclick>Control.SetFocus(30002)</onclick>
-				<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
-				<thumb>-</thumb>
-				<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
-			</item>
-			[...] - rest of items
-		</content>
-	</control>
+		<control type="list" id="XXX">
+			[...] <- list parameters, etc.
+			<content>
+				<item id="1">
+					<label>$INFO[Window.Property(RSS.1.Title)]</label>
+					<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
+					<onclick>XBMC.RunScript($INFO[Window.Property(SettingScript)],id=1)</onclick>
+					<onclick>Control.SetFocus(30002)</onclick>
+					<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
+					<thumb>-</thumb>
+					<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
+				</item>
+				[...] - rest of items
+			</content>
+		</control>
 	
 To display item's I've used Group Control (Explanation of <onclick>Control.SetFocus(30002)</onclick>):
 
