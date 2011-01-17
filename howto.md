@@ -10,11 +10,11 @@ Basic run code:
 	
 Full run code:
 
-	<onfocus>XBMC.RunScript(script.rssclient,feed=FEED_URL,imagecaching=TRUE|FALSE,htmlimg=TRUE|FALSE,limit=15,prefix=PREFIX)</onfocus>
+	<onfocus>XBMC.RunScript(script.rssclient,feed=FEED_URL,feed=FEED_URL2,imagecaching=TRUE|FALSE,htmlimg=TRUE|FALSE,limit=15,prefix=PREFIX)</onfocus>
 	
 **Params**:
 
-	feed - url to RSS feed
+	feed - url to RSS feed (can be more than one)
 	imagecaching - if set to true script will download images to userdata/Thumbnails/RSS directory. This enables usage of slideshow and multiimage control.
 	htmlimg - if enabled script will extract images from HTML image tags
 	limit - how much items to fetch
@@ -51,9 +51,10 @@ There is also one more global property:
 	
 **Using properites**:
 
+First we have to populate some container control
+
 1. Self written onclick (or onfocus) actions (fast, only properties that skinner will use will be set)
 
-	
 		<control type="list" id="XXX">
 			[...] <- list parameters, etc.
 			<content>
@@ -74,7 +75,7 @@ There is also one more global property:
 			</content>
 		</control>
 
-2. Using SettingScript to do the job (slower, as XBMC must find it, load it and finally execute it) - good 
+2. Using SettingScript to do the job (slower, as XBMC must find it, load it and finally execute it) - good for experimenting without need of changing many item entries
 
 		<control type="list" id="XXX">
 			[...] <- list parameters, etc.
@@ -147,19 +148,26 @@ To display item's I've used Group Control (Explanation of <onclick>Control.SetFo
 	
 This skeleton code allow to display item's details and play attached media / show images slideshow. Now lets show user some item details - let's create more controls (labels, textboxes, images) to above Group Control:
 
-	<label>$INFO[Container(XXX).ListItem(0).Label] - displaying current's item header</label>
-	<label>$INFO[Container(XXX).ListItem(0).Label2] - displaying current's item text</label>
-	<label>$INFO[Container(XXX).ListItem.Icon] - current's item image url (empty if there is no image)</label>
-	<label>$INFO[Window.Property(RSS.Date)]</label>
-	<label>$INFO[Window.Property(RSS.Channel)]</label>
-	<visible>Window.Property(RSS.SlideShowable)</visible>
-	<imagepath>$INFO[Window.Property(RSS.MultiImagePath)]</imagepath>
-	<visible>StringCompare(Window.Property(RSS.ImageCount),1)</visible>
-	
-<visible>!StringCompare(Container(XXX).ListItem.Icon,)</visible> - checking if there is image for current item (control is visible if there is image)
+	<label>$INFO[Container(XXX).ListItem.Label] - displaying current item header</label>
+	<label>$INFO[Container(XXX).ListItem.Label2] - displaying current item text</label>
+	<label>$INFO[Container(XXX).ListItem.Icon] - current item image url (empty if there is no image)</label>
+	<label>$INFO[Window.Property(RSS.Date)]</label> - current item date
+	<label>$INFO[Window.Property(RSS.Channel)]</label> - current item channel
+	<visible>Window.Property(RSS.SlideShowable)</visible> - check if we can use MultiImage control or Slideshow 
+	<imagepath>$INFO[Window.Property(RSS.MultiImagePath)]</imagepath> - path for MultiImage control or Slideshow
+	<visible>StringCompare(Container(XXX).ListItem.Icon,)</visible> - check if there is any image attached to item
 
-	
+Let's display indicator for user that video and slideshow feature is available for the item: (instruct to user to press Left/Right (to focus dummy button that will play the file on focus - <onleft>30004</onleft>/<onright>30005</onright>) 
 
-	
+	<control type="label">
+		[...] - posx, posy, etc
+		<label>Press 'LEFT' to play attached media</label>
+		<visible>!StringCompare(Window.Property(RSS.Media),)</visible>
+	</control>
 
+	<control type="label">
+		[...] - posx, posy, etc
+		<label>Press 'RIGHT' to start slideshow</label>
+		<visible>!StringCompare(Window.Property(RSS.SlideShowable),)</visible>
+	</control>
 	
