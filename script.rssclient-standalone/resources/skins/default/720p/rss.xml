@@ -303,6 +303,14 @@
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
 				</control>
+				<control type="image">
+					<posx>838</posx>
+					<posy>14</posy>
+					<width>20</width>
+					<height>16</height>
+					<texture>OverlayWatched.png</texture>
+					<visible>ListItem.Property(read)</visible>
+				</control>
 			</itemlayout>
 			<focusedlayout height="40" width="860">
 				<control type="image">
@@ -334,6 +342,14 @@
 					<align>left</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
+				</control>
+				<control type="image">
+					<posx>838</posx>
+					<posy>14</posy>
+					<width>20</width>
+					<height>16</height>
+					<texture>OverlayWatched.png</texture>
+					<visible>ListItem.Property(read)</visible>
 				</control>
 			</focusedlayout>
 		</control>
