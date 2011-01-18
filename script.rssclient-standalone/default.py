@@ -185,6 +185,7 @@ def addItemToList(item, myList):
     if len(item.image) > 0:
         liz.setProperty('image', item.image[0])
     else:
+        #print 'EMPTY ITEM = %s -> %s' % (item.channel.link, item.link)
         liz.setProperty('image', '')
     
     i = 1
@@ -196,6 +197,8 @@ def addItemToList(item, myList):
     
     val= (((imageCachingEnabled and len(item.image) > 1) and ['true'] or ['false'])[0])
     liz.setProperty('slideshowable', val)
+
+    
     liz.setProperty('multiimagepath', item.multiimagepath)
     
     liz.setProperty('date', item.date)
@@ -238,10 +241,11 @@ class VideoGUI(xbmcgui.WindowXML):
     def onInit(self):
         self.channelList =  self.getControl(30051)
         self.itemList = self.getControl(30050)
+        
         self.image = self.getControl(30011)
         self.justtext = self.getControl(30009)
-        self.textandimage = self.getControl(30010)
-        self.dateLabel = self.getControl(30008)
+        #self.textandimage = self.getControl(30010)
+        #self.dateLabel = self.getControl(30008)
         self.sortButton =self.getControl(39003)
         
         self.isReady = True
@@ -542,10 +546,10 @@ class VideoGUI(xbmcgui.WindowXML):
                     video = liz.getProperty('video')
                     
                     if( len(video) > 0):
-                        #if ',' in video:
-                        #   xbmc.Player().play(video)
-                        #else:
-                        xbmc.executebuiltin("XBMC.PlayMedia(&quot;%s&quot;)" % ( video) )
+                        if ',' in video:
+                           xbmc.Player().play(video)
+                        else:
+                            xbmc.executebuiltin("XBMC.PlayMedia(%s)" % ( video) )
                 elif action in ACTION_INFO:
                     if imageCachingEnabled:
                         liz = self.itemList.getSelectedItem()
@@ -651,25 +655,25 @@ class VideoGUI(xbmcgui.WindowXML):
                     if channel.link == self.currentChan or self.currentChan == '#all':
                         for item in channel.items:
                             if item.link == self.currentItem:
-                                self.dateLabel.setLabel(item.date)
+                                #self.dateLabel.setLabel(item.date)
                                 if len(item.image) > 0:
                                     #jest image
 
                                     self.image.setImage(item.image[0])
-                                    if(type(self.textandimage) == 'xbmcgui.ControlLabel' ):
-                                        self.textandimage.setLabel(self.cleanText(item.description))
+                                    if(type(self.justtext) == 'xbmcgui.ControlLabel' ):
+                                        #self.textandimage.setLabel(self.cleanText(item.description))
                                         self.justtext.setLabel('')
-                                    elif (type(self.textandimage) == 'xbmcgui.ControlTextBox' ):
-                                        self.textandimage.setText(self.cleanText(item.description))
+                                    elif (type(self.justtext) == 'xbmcgui.ControlTextBox' ):
+                                        #self.textandimage.setText(self.cleanText(item.description))
                                         self.justtext.setText('')
                                 else:
                                     self.image.setImage('')
-                                    if(type(self.textandimage) == 'xbmcgui.ControlLabel' ):
+                                    if(type(self.justtext) == 'xbmcgui.ControlLabel' ):
                                         self.justtext.setLabel(self.cleanText(item.description))
-                                        self.textandimage.setLabel('') 
-                                    elif (type(self.textandimage) == 'xbmcgui.ControlTextBox' ):
+                                        #self.textandimage.setLabel('') 
+                                    elif (type(self.justtext) == 'xbmcgui.ControlTextBox' ):
                                         self.justtext.setText(self.cleanText(item.description))
-                                        self.textandimage.setText('')
+                                        #self.textandimage.setText('')
     
     def onClick(self, controlID):
         #print 'CID %d' % controlID
@@ -871,7 +875,7 @@ if ( __name__ == "__main__" and launchIt):
     
     checkDir(xbmc.translatePath('special://masterprofile/Thumbnails/RSS'))
     
-    ui = VideoGUI( "rss.xml", os.getcwd(), "Default" )
+    ui = VideoGUI( "rss.xml", os.getcwd(), "default" )
     ui.selectBuiltin = selectBuiltin
     ui.sets = sets
 

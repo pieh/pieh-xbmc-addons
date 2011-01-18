@@ -227,7 +227,7 @@ class RSSParser:
                
                 if len(descs) != 0:
                     item.description = descs[0].childNodes[0].data
-
+                
                 dates = itemXML.getElementsByTagName('pubDate')
                 if len(dates) == 0:
                     dates = itemXML.getElementsByTagName('updated')
@@ -293,6 +293,12 @@ class RSSParser:
                 for record in records:
                     self.ReadYT(item, record[1]);
 
+                #<br> -> \n
+                nap = item.description
+                item.description = re.sub('(<[bB][rR][ /]>)|(<[/ ]*[pP]>)', '[CR]', item.description, re.DOTALL)
+                if (nap != item.description):
+                    print 'ZMIENIONO W item.link %s' % item.link
+                    
                 item.channel = channel
                 channel.items.append(item)
                 

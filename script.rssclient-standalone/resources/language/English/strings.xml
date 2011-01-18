@@ -5,13 +5,22 @@
     <string id="30002">Edit feeds</string>
     <string id="30003">Set chan. as read</string>
     <string id="30009">Go to settings</string>
+    <string id="30006">Show help</string>
     
-    <string id="30004">Press 'P' to play the video</string>
-    <string id="30006">Press 'I' to watch slideshow</string>
-    
+    <string id="30010">Press 'P' to play the video</string>
+    <string id="30011">Press 'I' to watch slideshow</string>
+    <string id="30012">Show item list</string>
+    <string id="30013">Show Slideshow</string>
+    <string id="30014">Play Video</string>
     
     <!-- settings -->
     <string id="30100">Basic settings</string>
     <string id="30101">Extract images from HTML tags</string>
     <string id="30102">Enable image caching (required for slideshows)</string>
+    
+    <!--  help -->
+    <string id="30201">UP - Channel list[CR]DOWN - Options[CR]LEFT - Previous item[CR]RIGHT - Next item</string>
+    <string id="30202">UP - Previous item[CR]DOWN - Next item[CR]LEFT / RIGHT - Back to main view</string>
+    <string id="30203">UP - Previous channel[CR]DOWN - Next channel[CR]LEFT - Settings[CR]RIGHT - Back to main view</string>
+    <string id="30204">UP - Back to main view[CR]DOWN - Channel list[CR]LEFT / RIGHT - Select option</string>
 </strings>
