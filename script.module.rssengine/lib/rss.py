@@ -296,8 +296,6 @@ class RSSParser:
                 #<br> -> \n
                 nap = item.description
                 item.description = re.sub('(<[bB][rR][ /]>)|(<[/ ]*[pP]>)', '[CR]', item.description, re.DOTALL)
-                if (nap != item.description):
-                    print 'ZMIENIONO W item.link %s' % item.link
                     
                 item.channel = channel
                 channel.items.append(item)
