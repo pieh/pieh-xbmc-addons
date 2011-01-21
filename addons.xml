@@ -23,11 +23,11 @@
     <import addon="plugin.video.youtube" />
     <import addon="script.module.rssengine" version="1.0.0" />
   </requires>
-  <extension point="xbmc.python.module"
+  <extension point="xbmc.python.library"
              library="default.py" />
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">RSS Client</summary>
-    <description lang="en">rss client [...]</description>
+    <summary lang="en">RSS Client Background</summary>
+    <description lang="en">For skinners to attach RSS feeds into the skins. Read more in howto.md attached to addon or on https://github.com/pieh/pieh-xbmc-addons/blob/master/script.rssclient/howto.md</description>
     <platform>all</platform>
   </extension>
 </addon>
@@ -47,7 +47,7 @@
              library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en">RSS Client</summary>
-    <description lang="en">rss client [...]</description>
+    <description lang="en">Script allows to navigate through RSS feeds and read them. Able of displaying attached media: single images, multiple images (as slideshow) and videos.</description>
     <platform>all</platform>
   </extension>
 </addon>
