@@ -14,7 +14,7 @@
              library="default.py" />
   <extension point="xbmc.addon.metadata">
     <summary lang="en">RSS Client</summary>
-    <description lang="en">rss client [...]</description>
+    <description lang="en">Script allows to navigate through RSS feeds and read them. Able of displaying attached media: single images, multiple images (as slideshow) and videos.</description>
     <platform>all</platform>
   </extension>
 </addon>

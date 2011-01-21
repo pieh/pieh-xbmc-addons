@@ -405,25 +405,24 @@
 					<width>290</width>
 					<height>41</height>
 					<texture border="0,2,0,2">MenuItemFO.png</texture>
-					<visible>Control.HasFocus(30051)</visible>
 					<include>VisibleFadeEffect</include>
 				</control>
 				<control type="image">
-					<posx>240</posx>
+					<posx>00</posx>
 					<posy>5</posy>
-					<width>200</width>
+					<width>290</width>
 					<height>31</height>
 					<texture border="0,0,14,0">MediaItemDetailBG.png</texture>
-					<visible>Control.HasFocus(30051) + !IsEmpty(ListItem.Label2)</visible>
+					<visible>Control.HasFocus(30051)</visible>
 				</control>
 				<control type="label">
 					<posx>10</posx>
 					<posy>0</posy>
-					<width>660</width>
+					<width>260</width>
 					<height>40</height>
 					<font>font13</font>
 					<textcolor>white</textcolor>
-					<selectedcolor>selected</selectedcolor>
+					<selectedcolor>white</selectedcolor>
 					<align>left</align>
 					<aligny>center</aligny>
 					<label>$INFO[ListItem.Label]</label>
