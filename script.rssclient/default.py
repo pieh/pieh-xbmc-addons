@@ -270,7 +270,8 @@ class BackgroundRSSReaderReadSets(Thread):
                     
                     okno.setProperty('%sRSS.%d.ImageCount' % (prefix, c), str(len(item.image)) )
                     
-                    okno.setProperty('%sRSS.%d.SlideShowable', (( (imageCachingEnabled and len(item.image) > 1) and ['true'] or ['false'])[0]))
+                    
+                    okno.setProperty('%sRSS.%d.SlideShowable' % (prefix, c), (( (imageCachingEnabled and len(item.image) > 1) and ['true'] or ['false'])[0]))
                     okno.setProperty('%sRSS.%d.MultiImagePath' % (prefix, c), item.multiimagepath)
                     
                     i = 1

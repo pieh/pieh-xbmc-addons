@@ -69,6 +69,12 @@ First we have to populate some container control
 				<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
 				<thumb>-</thumb>
 				<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
+				
+				<!-- only if needed -->
+				<property name="RSS.Image.1">$INFO[Window.Property(RSS.1.Image.1)]</property>
+				<property name="RSS.Image.2">$INFO[Window.Property(RSS.1.Image.2)]</property>
+				<property name="RSS.Image.3">$INFO[Window.Property(RSS.1.Image.3)]</property>
+				<property name="RSS.Image._UP_TO_ImageCount">$INFO[Window.Property(RSS.1.Image._UP_TO_ImageCount)]</property>
 			</item>
 			[...] - rest of items
 		</content>
@@ -96,6 +102,6 @@ Let's display indicator for user that video and slideshow feature is available f
 	<control type="label">
 		[...] - posx, posy, etc
 		<label>Slideshow is available</label>
-		<visible>!StringCompare(Container(XXX).ListItem.Property(RSS.SlideShowable),)</visible>
+		<visible>Container(XXX).ListItem.Property(RSS.SlideShowable)</visible>
 	</control>
 	
