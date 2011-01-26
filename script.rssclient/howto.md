@@ -24,11 +24,11 @@ Full run code:
 
 Firstly let's understand how this script passes data to skin. Similiar to RecentlyAdded addon it sets window's properties. Properties name are formated:
 
-	RSS.x.Property
+	RSS.x.PropertyName
 	
 or (if prefix was specified):
 
-	PREFIX.RSS.x.Property
+	PREFIX.RSS.x.PropertyName (f.e. if set prefix=1 then 1.RSS.x.PropertyName)
 	
 where x is number of RSS item
 
@@ -104,4 +104,5 @@ Let's display indicator for user that video and slideshow feature is available f
 		<label>Slideshow is available</label>
 		<visible>Container(XXX).ListItem.Property(RSS.SlideShowable)</visible>
 	</control>
+
 	
