@@ -53,121 +53,49 @@ There is also one more global property:
 
 First we have to populate some container control
 
-1. Self written onclick (or onfocus) actions (fast, only properties that skinner will use will be set)
-
-		<control type="list" id="XXX">
-			[...] <- list parameters, etc.
-			<content>
-				<item id="1">
-					<label>$INFO[Window.Property(RSS.1.Title)]</label>
-					<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
-					<onclick>SetProperty(RSS.Date,&quot;$INFO[Window.Property(RSS.1.Date)]&quot;)</onclick>
-					<onclick>SetProperty(RSS.Channel,&quot;$INFO[Window.Property(RSS.1.Channel)]&quot;)</onclick>
-					<onclick>SetProperty(RSS.Media,&quot;$INFO[Window.Property(RSS.1.Media)]&quot;)</onclick>
-					<onclick>SetProperty(RSS.SlideShowable,&quot;$INFO[Window.Property(RSS.1.SlideShowable)]&quot;)</onclick>
-					<onclick>SetProperty(RSS.MultiImagePath,&quot;$INFO[Window.Property(RSS.1.MultiImagePath)]&quot;)</onclick>
-					<onclick>Control.SetFocus(30002)</onclick>
-					<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
-					<thumb>-</thumb>
-					<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
-				</item>
-				[...] - rest of items
-			</content>
-		</control>
-
-2. Using SettingScript to do the job (slower, as XBMC must find it, load it and finally execute it) - good for experimenting without need of changing many item entries
-
-		<control type="list" id="XXX">
-			[...] <- list parameters, etc.
-			<content>
-				<item id="1">
-					<label>$INFO[Window.Property(RSS.1.Title)]</label>
-					<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
-					<onclick>XBMC.RunScript($INFO[Window.Property(SettingScript)],id=1)</onclick>
-					<onclick>Control.SetFocus(30002)</onclick>
-					<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
-					<thumb>-</thumb>
-					<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
-				</item>
-				[...] - rest of items
-			</content>
-		</control>
-	
-To display item's I've used Group Control (Explanation of <onclick>Control.SetFocus(30002)</onclick>):
-
-	<control type="group">
-		[...] - controls displaying item's content, date, channel, header, image etc
-		<control type="button" id="30002">
-			<onup>XXX</onup>
-			<ondown>XXX</ondown>
-			<onleft>30004</onleft>
-			<onright>30005</onright>
-			<onclick>Control.SetFocus(XXX)</onclick>
-			<posx>-20</posx>
-			<posy>-20</posy>
-			<width>1</width>
-			<height>1</height>
-			<visible>True</visible>
-		</control>
-		<control type="button" id="30004">
-			<onfocus>SetFocus(30002)</onfocus>
-			<onfocus>XBMC.PlayMedia($INFO[Window.Property(RSS.Media)])</onfocus>
-			<posx>-20</posx>
-			<posy>-20</posy>
-			<width>1</width>
-			<height>1</height>
-			<visible>!StringCompare(Window.Property(RSS.Media),)</visible>
-		</control>
-		<control type="button" id="30004">
-			<onfocus>SetFocus(30002)</onfocus>
-			<posx>-20</posx>
-			<posy>-20</posy>
-			<width>1</width>
-			<height>1</height>
-			<visible>StringCompare(Window.Property(RSS.Media),)</visible>
-		</control>
-		<control type="button" id="30005">
-			<onfocus>SetFocus(30002)</onfocus>
-			<onfocus>XBMC.SlideShow($INFO[Window.Property(RSS.MultiImagePath)])</onfocus>
-			<posx>-20</posx>
-			<posy>-20</posy>
-			<width>1</width>
-			<height>1</height>
-			<visible>Window.Property(RSS.SlideShowable)</visible>
-		</control>
-		<control type="button" id="30005">
-			<onfocus>SetFocus(30002)</onfocus>
-			<posx>-20</posx>
-			<posy>-20</posy>
-			<width>1</width>
-			<height>1</height>
-			<visible>!Window.Property(RSS.SlideShowable)</visible>
-		</control>
-		<visible>Control.HasFocus(30002)</visible>
+	<control type="list" id="XXX">
+		[...] <- list parameters, etc.
+		<content>
+			<item id="1">
+				<label>$INFO[Window.Property(RSS.1.Title)]</label>
+				<label2>$INFO[Window.Property(RSS.1.Desc)]</label2>
+				<property name="RSS.Date">$INFO[Window.Property(RSS.1.Date)]</property>
+				<property name="RSS.Channel">$INFO[Window.Property(RSS.1.Channel)]</property>
+				<property name="RSS.Media">$INFO[Window.Property(RSS.1.Media)]</property>
+				<property name="RSS.SlideShowable">$INFO[Window.Property(RSS.1.SlideShowable)]</property>
+				<property name="RSS.MultiImagePath">$INFO[Window.Property(RSS.1.MultiImagePath)]</property>
+				<property name="RSS.ImageCount">$INFO[Window.Property(RSS.1.ImageCount)]</property>
+				<property name="RSS.Date">$INFO[Window.Property(RSS.1.Date)]</property>
+				<icon>$INFO[Window.Property(RSS.1.Image)]</icon>
+				<thumb>-</thumb>
+				<visible>IntegerGreaterThan(Window.Property(RSS.count),1)</visible>
+			</item>
+			[...] - rest of items
+		</content>
 	</control>
-	
-This skeleton code allow to display item's details and play attached media / show images slideshow. Now lets show user some item details - let's create more controls (labels, textboxes, images) to above Group Control:
+
+To display items:
 
 	<label>$INFO[Container(XXX).ListItem.Label]</label> - displaying current item header
 	<label>$INFO[Container(XXX).ListItem.Label2]</label> - displaying current item text
 	<label>$INFO[Container(XXX).ListItem.Icon]</label> - current item image url (empty if there is no image)
-	<label>$INFO[Window.Property(RSS.Date)]</label> - current item date
-	<label>$INFO[Window.Property(RSS.Channel)]</label> - current item channel
-	<visible>Window.Property(RSS.SlideShowable)</visible> - check if we can use MultiImage control or Slideshow 
-	<imagepath>$INFO[Window.Property(RSS.MultiImagePath)]</imagepath> - path for MultiImage control or Slideshow
+	<label>$INFO[Container(XXX).ListItem.Property(RSS.Date)]</label> - current item date
+	<label>$INFO[Container(XXX).ListItem.Property(RSS.Channel)]</label> - current item channel
+	<visible>Container(XXX).ListItem.Property(RSS.SlideShowable)</visible> - check if we can use MultiImage control or Slideshow 
+	<imagepath>$INFO[Container(XXX).ListItem.Property(RSS.MultiImagePath)]</imagepath> - path for MultiImage control or Slideshow
 	<visible>StringCompare(Container(XXX).ListItem.Icon,)</visible> - check if there is any image attached to item
 
 Let's display indicator for user that video and slideshow feature is available for the item: (instruct to user to press Left/Right (to focus dummy button that will play the file on focus - <onleft>30004</onleft>/<onright>30005</onright>) 
 
 	<control type="label">
 		[...] - posx, posy, etc
-		<label>Press 'LEFT' to play attached media</label>
-		<visible>!StringCompare(Window.Property(RSS.Media),)</visible>
+		<label>Video is available</label>
+		<visible>!StringCompare(Container(XXX).ListItem.Property(RSS.Media),)</visible>
 	</control>
 
 	<control type="label">
 		[...] - posx, posy, etc
-		<label>Press 'RIGHT' to start slideshow</label>
-		<visible>!StringCompare(Window.Property(RSS.SlideShowable),)</visible>
+		<label>Slideshow is available</label>
+		<visible>!StringCompare(Container(XXX).ListItem.Property(RSS.SlideShowable),)</visible>
 	</control>
 	
