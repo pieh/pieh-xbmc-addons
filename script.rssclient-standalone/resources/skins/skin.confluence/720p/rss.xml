@@ -82,7 +82,7 @@
 				<font>font10</font>
 				<textcolor>white</textcolor>
 				<spincolor>FFFFFFFF</spincolor>
-			</control>
+			</control>	
 			
 			
 			<control type="label">
@@ -430,6 +430,69 @@
 			</focusedlayout>
 		</control>
 		
+		<control type="group">
+			<visible>!Skin.HasSetting(HideHelp)</visible>
+			<control type="label">
+				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
+				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
+				<posx>40</posx>
+				<posy>580</posy>
+				<width>250</width>
+				<height>80</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$ADDON[script.rssclient-standalone 30201]</label>
+				<wrapmultiline>true</wrapmultiline>
+				<font>font10</font>
+				<textcolor>white</textcolor>
+				<visible>Control.HasFocus(30049)</visible>
+			</control>
+			<control type="label">
+				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
+				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
+				<posx>40</posx>
+				<posy>580</posy>
+				<width>250</width>
+				<height>80</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$ADDON[script.rssclient-standalone 30202]</label>
+				<wrapmultiline>true</wrapmultiline>
+				<font>font10</font>
+				<textcolor>white</textcolor>
+				<visible>Control.HasFocus(30050)</visible>
+			</control>
+			<control type="label">
+				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
+				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
+				<posx>40</posx>
+				<posy>580</posy>
+				<width>250</width>
+				<height>80</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$ADDON[script.rssclient-standalone 30203]</label>
+				<wrapmultiline>true</wrapmultiline>
+				<font>font10</font>
+				<textcolor>white</textcolor>
+				<visible>Control.HasFocus(30051)</visible>
+			</control>
+			<control type="label">
+				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
+				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
+				<posx>40</posx>
+				<posy>580</posy>
+				<width>250</width>
+				<height>80</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<label>$ADDON[script.rssclient-standalone 30204]</label>
+				<wrapmultiline>true</wrapmultiline>
+				<font>font10</font>
+				<textcolor>white</textcolor>
+				<visible>Control.HasFocus(39000) | Control.HasFocus(39001) | Control.HasFocus(39002)</visible>
+			</control>
+		</control>
 		
 		<control type="group" id="30005">
 			<posx>-240</posx>
@@ -452,7 +515,7 @@
 				<onright>39004</onright>
 				<onleft>30049</onleft>
 				<ondown>39007</ondown>
-				<onup>39009</onup>
+				<onup>39011</onup>
 				<label>103</label>
 				<textcolor>FFFFFFFF</textcolor>
 				<height>40</height>
@@ -530,7 +593,7 @@
 				<posy>160</posy>
 				<onright>30051</onright>
 				<onleft>30049</onleft>
-				<ondown>39010</ondown>
+				<ondown>39999</ondown>
 				<onup>39008</onup>
 				<label>$ADDON[script.rssclient-standalone 30003]</label>
 				<textcolor>FFFFFFFF</textcolor>
@@ -543,7 +606,7 @@
 				<pulseonselect>false</pulseonselect>
 			</control>
 			
-			<control type="button" id="39010">
+			<control type="button" id="39999">
 				<description>go to addon settings</description>
 				<posx>0</posx>
 				<posy>200</posy>
@@ -569,7 +632,7 @@
 				<onright>30051</onright>
 				<onleft>30049</onleft>
 				<ondown>39003</ondown>
-				<onup>39010</onup>
+				<onup>39999</onup>
 				<textcolor>FFFFFFFF</textcolor>
 				<radiowidth>24</radiowidth>
 				<radioheight>24</radioheight>
@@ -582,73 +645,9 @@
 				<texturefocus border="5">button-focus.png</texturefocus>
 				<texturenofocus>-</texturenofocus>
 				<pulseonselect>false</pulseonselect>
-				<selected>Skin.HasSetting(ShowHelp)</selected>
-				<onclick>Skin.ToggleSetting(ShowHelp)</onclick>
+				<selected>!Skin.HasSetting(HideHelp)</selected>
+				<onclick>Skin.ToggleSetting(HideHelp)</onclick>
 				<label>$ADDON[script.rssclient-standalone 30006]</label>
-			</control>
-		</control>
-
-		<control type="group">
-			<visible>Skin.HasSetting(ShowHelp)</visible>
-			<control type="label">
-				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
-				<posx>40</posx>
-				<posy>580</posy>
-				<width>250</width>
-				<height>80</height>
-				<align>center</align>
-				<aligny>center</aligny>
-				<label>$ADDON[script.rssclient-standalone 30201]</label>
-				<wrapmultiline>true</wrapmultiline>
-				<font>font10</font>
-				<textcolor>white</textcolor>
-				<visible>Control.HasFocus(30049)</visible>
-			</control>
-			<control type="label">
-				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
-				<posx>40</posx>
-				<posy>580</posy>
-				<width>250</width>
-				<height>80</height>
-				<align>center</align>
-				<aligny>center</aligny>
-				<label>$ADDON[script.rssclient-standalone 30202]</label>
-				<wrapmultiline>true</wrapmultiline>
-				<font>font10</font>
-				<textcolor>white</textcolor>
-				<visible>Control.HasFocus(30050)</visible>
-			</control>
-			<control type="label">
-				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
-				<posx>40</posx>
-				<posy>580</posy>
-				<width>250</width>
-				<height>80</height>
-				<align>center</align>
-				<aligny>center</aligny>
-				<label>$ADDON[script.rssclient-standalone 30203]</label>
-				<wrapmultiline>true</wrapmultiline>
-				<font>font10</font>
-				<textcolor>white</textcolor>
-				<visible>Control.HasFocus(30051)</visible>
-			</control>
-			<control type="label">
-				<animation effect="fade" start="100" end="0" time="400">Hidden</animation>
-				<animation effect="fade" start="0" end="100" time="400" delay="200">Visible</animation>
-				<posx>40</posx>
-				<posy>580</posy>
-				<width>250</width>
-				<height>80</height>
-				<align>center</align>
-				<aligny>center</aligny>
-				<label>$ADDON[script.rssclient-standalone 30204]</label>
-				<wrapmultiline>true</wrapmultiline>
-				<font>font10</font>
-				<textcolor>white</textcolor>
-				<visible>Control.HasFocus(39000) | Control.HasFocus(39001) | Control.HasFocus(39002)</visible>
 			</control>
 		</control>
 	</controls>

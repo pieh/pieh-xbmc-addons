@@ -37,6 +37,7 @@ limit = 20
 controlListId = -1
 
 addon = xbmcaddon.Addon('script.rssclient-standalone')
+
 includeHTMLsIMG = addon.getSetting('htmlimg') in ['true', 'True', 1]
 imageCachingEnabled = addon.getSetting('imagecaching') in ['true', 'True', 1]
 ui = None
@@ -592,6 +593,19 @@ class VideoGUI(xbmcgui.WindowXML):
                 self.updateSortButton()
             elif id == 39009 and action in ACTION_SELECT:
                 self.setAsRead(self.currentChan)
+            elif id == 39999 and action in ACTION_SELECT:
+                addon.openSettings()
+                print 'lol'
+
+                tmp_includeHTMLsIMG = addon.getSetting('htmlimg') in ['true', 'True', 1]
+                tmp_imageCachingEnabled = addon.getSetting('imagecaching') in ['true', 'True', 1]
+                
+                reader.setImageCaching(tmp_includeHTMLsIMG)
+                reader.setIncludeHTMLimg(tmp_imageCachingEnabled)
+                bgReadSet = BackgroundRSSReaderReadSets(sets, reader)
+                bgReadSet.setDaemon(True)
+                bgReadSet.start()
+            else:
                 return
             
     def setAsRead(self, channellink):
@@ -812,47 +826,17 @@ class BackgroundRSSReaderReadSets(Thread):
 
 
 selectBuiltin = None
-launchIt = True
+
 tmpSet = None
 prefix = ''
 
 for arg in sys.argv:
 
     param = str(arg).lower()
-    if 'onItemSelect=' in param:
-        selectBuiltin = param.replace('onItemSelect=','')
-    if param.startswith('prefix='):
-        prefix = param.replace('prefix=', '')
-        if not prefix.endswith('.'):
-            prefix = prefix + '.'
     if 'feed=' in param:
         feeds.append(param.replace('feed=', ''))
-    if 'limit=' in param:
-        limit = int(param.replace('limit=', ''))
-    if 'htmlimg=' in param:
-        
-        if 'true' in param:
-            includeHTMLsIMG = True
-        elif 'false' in param:
-            includeHTMLsIMG = False
-            
-    if 'imagecaching=' in param:
-        if 'true' in param:
-            imageCachingEnabled = True
-        elif 'false' in param:
-            imageCachingEnabled = False       
-    if param != 'script.rssclient':
-        args = args + ',' + arg    
 
-
-if ( __name__ == "__main__" and launchIt):
-
-    print 'htmlimg %s' % includeHTMLsIMG
-    print 'imageCachingEnabled %s' % imageCachingEnabled
-    
-    #includeHTMLsIMG = addon.getSetting('htmlimg') in ['true', 'True', 1]
-    #imageCachingEnabled = addon.getSetting('imagecaching') in ['true', 'True', 1]
-    
+if ( __name__ == "__main__"):
     feedslist = RSSFeedsListLoader()
     sets = []
     selected_source = None
