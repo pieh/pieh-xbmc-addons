@@ -1,6 +1,6 @@
 import urllib, os.path, xbmc, re, htmlentitydefs, time
 
-from xbmcgui import Window
+from xbmcgui import Window, WindowDialog
 from threading import Thread
 from threading import Lock
 import xbmcaddon
@@ -189,7 +189,17 @@ class BackgroundRSSReaderReadSets(Thread):
     def run(self):
         okno = None
         try:
-            okno = Window(xbmcgui.getCurrentWindowId())
+            if isWindow:
+                if ID == -1:
+                    okno = Window(xbmcgui.getCurrentWindowId())
+                else:
+                    okno = Window(ID)
+            else:
+                if ID == -1:
+                    okno = WindowDialog(xbmcgui.getCurrentWindowDialogId())
+                else:
+                    okno = WindowDialog(ID)
+                
             okno.setProperty('RSS.count', '0');
         except:
             pass
@@ -306,10 +316,24 @@ selectBuiltin = None
 launchIt = True
 tmpSet = None
 prefix = ''
+isWindow = True
+ID = -1
 
 for arg in sys.argv:
 
     param = str(arg).lower()
+    if 'window' == param:
+        isWindow = True
+        ID = -1
+    elif 'window=' in param:
+        isWindow = True
+        ID = int(param.replace('window=', ''))
+    elif 'dialog' == param:
+        isWindow = False
+        ID = -1
+    elif 'dialog=' in param:
+        isWindow = False
+        ID = int(param.replace('dialog=', ''))
     if 'onItemSelect=' in param:
         selectBuiltin = param.replace('onItemSelect=','')
     if param.startswith('prefix='):
