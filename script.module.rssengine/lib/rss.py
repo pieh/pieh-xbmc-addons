@@ -376,10 +376,11 @@ class RSSParser:
         self.source = src
         log('Reading from internet (%s)' % self.source.url)
 
-        encurl = self.source.url.replace("amp;", "&")
+        encurl = self.source.url.replace("amp;", "&").replace(' ', '%20')
         #print 'MYURL = %s' % encurl
         
         f = urllib.urlopen(  encurl  )
+        
         xmlDocument = f.read()
         f.close()
         self.dom = xml.dom.minidom.parseString( str(xmlDocument))

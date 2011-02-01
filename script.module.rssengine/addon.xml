@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.module.rssengine" name="RSS Engine Addon"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
