@@ -10,7 +10,7 @@ Basic run code:
 	
 Full run code:
 
-	<onfocus>XBMC.RunScript(script.rssclient,feed=FEED_URL,feed=FEED_URL2,imagecaching=TRUE|FALSE,htmlimg=TRUE|FALSE,limit=15,prefix=PREFIX)</onfocus>
+	<onfocus>XBMC.RunScript(script.rssclient,feed=FEED_URL,feed=FEED_URL2,imagecaching=TRUE|FALSE,htmlimg=TRUE|FALSE,limit=15,window|window=ID|dialog|dialog=ID,prefix=PREFIX)</onfocus>
 	
 **Params**:
 
@@ -18,6 +18,7 @@ Full run code:
 	imagecaching - if set to true script will download images to userdata/Thumbnails/RSS directory. This enables usage of slideshow and multiimage control.
 	htmlimg - if enabled script will extract images from HTML image tags
 	limit - how much items to fetch
+	window|window=ID|dialog|dialog=ID - specify where to pass data. window = current window, window=ID = window specified by ID, dialog = current dialog, dialog=ID = dialog specified by ID. By default script passes data to current window. 
 	prefix - this is useful if You want to provide multiple feeds to multiple containers (lists) - it allows to distinguish between items from different feeds by adding prefix to them
 
 ## How to use data
