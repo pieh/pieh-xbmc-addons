@@ -50,7 +50,9 @@ There is also one more global property:
 
 	RSS.count - holds count of RSS items passed to skin (usefull if script will return less items than skinner wanted - limit parameter)
 	
-**Using properites**:
+## Using properites:
+
+**In list**
 
 First we have to populate some container control
 

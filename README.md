@@ -4,7 +4,7 @@ Download [Repo installer](https://github.com/downloads/pieh/pieh-xbmc-addons/rep
 
 ## RSS Client (script.rssclient-standalone)
 
-Standalone RSS Client. Provides dedicated GUI for browsing through RSS Feeds. Allow user to open attached media (Images and Videos).
+Standalone RSS Client. Provides dedicated GUI for browsing through RSS Feeds. Allow user to open attached media (Images and Videos). Skinning readme [How To](http://github.com/pieh/pieh-xbmc-addons/blob/master/HowTo/skinning_standalone.md)
 
 ## RSS Client Background (script.rssclient)
 

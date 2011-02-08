@@ -243,11 +243,14 @@ class VideoGUI(xbmcgui.WindowXML):
         self.channelList =  self.getControl(30051)
         self.itemList = self.getControl(30050)
         
-        self.image = self.getControl(30011)
-        self.justtext = self.getControl(30009)
+        #self.image = self.getControl(30011)
+        #self.justtext = self.getControl(30009)
         #self.textandimage = self.getControl(30010)
         #self.dateLabel = self.getControl(30008)
-        self.sortButton =self.getControl(39003)
+        try:
+            self.sortButton =self.getControl(39003)
+        except:
+            pass
         
         self.isReady = True
         self.channelList.selectItem(0)
@@ -257,8 +260,11 @@ class VideoGUI(xbmcgui.WindowXML):
 
 
     def updateSortButton(self):
-        self.sortButton.setLabel("SORT BY: %s" % self.sortmodes[self.sortmode])
-        self.updateItemListWork(True)
+        try:
+            self.updateItemListWork(True)
+            self.sortButton.setLabel("SORT BY: %s" % self.sortmodes[self.sortmode])
+        except:
+            pass
         
     def updateChannelList(self):
         if not self.updateChannelListWork(False):
@@ -595,7 +601,7 @@ class VideoGUI(xbmcgui.WindowXML):
                 self.setAsRead(self.currentChan)
             elif id == 39999 and action in ACTION_SELECT:
                 addon.openSettings()
-                print 'lol'
+                
 
                 tmp_includeHTMLsIMG = addon.getSetting('htmlimg') in ['true', 'True', 1]
                 tmp_imageCachingEnabled = addon.getSetting('imagecaching') in ['true', 'True', 1]
@@ -663,6 +669,8 @@ class VideoGUI(xbmcgui.WindowXML):
         self.checkIfChannelRead(chan)
         
     def updateText(self):
+        return
+    
         for set in self.sets:
             for source in set.sources:
                 for channel in source.channels:
@@ -859,7 +867,7 @@ if ( __name__ == "__main__"):
     
     checkDir(xbmc.translatePath('special://masterprofile/Thumbnails/RSS'))
     
-    ui = VideoGUI( "rss.xml", os.getcwd(), "default" )
+    ui = VideoGUI( "script-rssclient-standalone-main.xml", os.getcwd(), "default" )
     ui.selectBuiltin = selectBuiltin
     ui.sets = sets
 
