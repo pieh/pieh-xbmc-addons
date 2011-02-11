@@ -34,7 +34,7 @@
 
 <addon id="script.rssclient-standalone"
        name="RSS Client"
-       version="1.0.1"
+       version="1.0.2"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
