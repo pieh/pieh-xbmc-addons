@@ -197,6 +197,10 @@ class RSSParser:
         #parse - get channel
         del self.source.channels[:]
         channels = self.dom.getElementsByTagName('channel')
+        
+        if len(channels) == 0:
+            channels = self.dom.getElementsByTagName('feed')
+        
         for channelXML in channels:
             channel = RSSChannel()
             channel.title = channelXML.getElementsByTagName('title')[0].childNodes[0].data
@@ -289,10 +293,13 @@ class RSSParser:
                 except:
                     pass
                 
+                self.ReadYT(item, item.description);
+                '''
                 records = re.findall( '<embed(.+?)src="(.+?)"(.*?)>(.*?)</embed>', item.description, re.DOTALL )
                 for record in records:
                     self.ReadYT(item, record[1]);
-
+                '''
+                
                 #<br> -> \n
                 nap = item.description
                 item.description = re.sub('(<[bB][rR][ /]>)|(<[/ ]*[pP]>)', '[CR]', item.description, re.DOTALL)
@@ -330,12 +337,20 @@ class RSSParser:
         item.multiimagepath = tpath
         
     def ReadYT(self, item, string):
+        
         if 'youtube.com/v' in string:
             vid_ids = re.findall('http://www.youtube.com/v/(.{11})\??', string, re.DOTALL )
             for id in vid_ids:
                 item.video = 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % id
                 return True
-
+            
+        if 'youtube.com/watch' in string:
+            vid_ids = re.findall('youtube.com/watch\?v=(.{11})\??', string, re.DOTALL )
+            
+            for id in vid_ids:
+                item.video = 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % id
+                return True
+        
         return False
     
     def ReadIMG(self, item, string):
