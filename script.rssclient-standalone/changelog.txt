@@ -1,1 +1,3 @@
 Initial version of RSS standalone client script.
+
+1.0.3 - fixing bug with keeping script alive

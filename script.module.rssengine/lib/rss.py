@@ -63,7 +63,7 @@ class ImageCacher(Thread):
     
     def run(self):
         self.isRunning = True
-        while self.keepRunning and len(self.queue) > 0:
+        while self.keepRunning and len(self.queue) > 0 and not xbmc.abortRequested:
             try:
                 item = self.queue[0]
                 for url in item.imageURLS:

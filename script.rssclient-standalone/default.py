@@ -287,7 +287,7 @@ class VideoGUI(xbmcgui.WindowXML):
         else:
             try:
                 i = 0
-                while True:
+                while not xbmc.abortRequested:
                     actualitems.append(self.channelList.getListItem(i))
                     i += 1
             except:
@@ -349,7 +349,7 @@ class VideoGUI(xbmcgui.WindowXML):
         else:
             try:
                 i = 0
-                while True:
+                while not xbmc.abortRequested:
                     actualitems.append(self.itemList.getListItem(i))
                     i += 1
             except:
@@ -480,7 +480,7 @@ class VideoGUI(xbmcgui.WindowXML):
     def getLizFromItems(self, link):
         try:
             i = 0
-            while True:
+            while not xbmc.abortRequested:
                 liz = self.itemList.getListItem(i)
                 if liz.getProperty('link') == link:
                     return liz
@@ -493,7 +493,7 @@ class VideoGUI(xbmcgui.WindowXML):
     def getLizFromChannels(self, link):
         try:
             i = 0
-            while True:
+            while not xbmc.abortRequested:
                 liz = self.channelList.getListItem(i)
                 if liz.getProperty('link') == link:
                     return liz
