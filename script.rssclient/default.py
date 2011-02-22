@@ -38,6 +38,7 @@ limit = 20
 controlListId = -1
 includeHTMLsIMG = True
 imageCachingEnabled = True
+alarmEnabled = True
 ui = None
 # Current Working Directory
 CWD = os.getcwd()
@@ -306,7 +307,7 @@ class BackgroundRSSReaderReadSets(Thread):
         except:
             pass
 
-        if next_update > -1:
+        if alarmEnabled and next_update > -1:
             alarmhash = xbmc.getCacheThumbName(args + str(time.localtime())).replace('.tbn', '')
             napis = 'AlarmClock(RSS_CHECK_%s,XBMC.RunScript(script.rssclient%s),%d,True)' % (alarmhash, args, ((next_update+60)  / 60.0))  
             log('Refresh in %d minutes' % ((next_update+60)  / 60.0))
@@ -334,6 +335,11 @@ for arg in sys.argv:
     elif 'dialog=' in param:
         isWindow = False
         ID = int(param.replace('dialog=', ''))
+    if 'alarm=' in param:
+        if 'true' in param:
+            alarmEnabled = True
+        elif 'false' in param:
+            alarmEnabled = False   
     if 'onItemSelect=' in param:
         selectBuiltin = param.replace('onItemSelect=','')
     if param.startswith('prefix='):
