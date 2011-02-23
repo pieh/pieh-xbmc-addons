@@ -7,7 +7,8 @@
 			<posy>-20</posy>
 			<width>1</width>
 			<height>1</height>
-			<onfocus>RunScript(script.ExtraMusicInfo,ArtistName=$INFO[Listitem.Artist],info=SimiliarArtistsInLibrary)</onfocus>
+			<onfocus>SetProperty(SimiliarArtists.Count,0)</onfocus>
+			<onfocus>RunScript(script.ExtraMusicInfo,window=12001,ArtistName=$INFO[Listitem.Artist],info=SimiliarArtistsInLibrary)</onfocus>
 			<onfocus>SetFocus(5)</onfocus>
 		</control>
 	
@@ -614,40 +615,40 @@
 					
 					<content>
 						<item id="1">
-							<label>$INFO[Window(10000).Property(SimiliarArtists.1.name)]</label>
-							<icon>$INFO[Window(10000).Property(SimiliarArtists.1.thumb)]</icon>
+							<label>$INFO[Window.Property(SimiliarArtists.1.name)]</label>
+							<icon>$INFO[Window.Property(SimiliarArtists.1.thumb)]</icon>
 							<onclick>Dialog.Close(musicinformation)</onclick>
-							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window(10000).Property(SimiliarArtists.1.xbmc_id)]/)</onclick>
-							<visible>IntegerGreaterThan(Window(10000).Property(SimiliarArtists.Count),0)</visible>
+							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window.Property(SimiliarArtists.1.xbmc_id)]/)</onclick>
+							<visible>IntegerGreaterThan(Window.Property(SimiliarArtists.Count),0)</visible>
 						</item>
 						<item id="2">
-							<label>$INFO[Window(10000).Property(SimiliarArtists.2.name)]</label>
-							<icon>$INFO[Window(10000).Property(SimiliarArtists.2.thumb)]</icon>
+							<label>$INFO[Window.Property(SimiliarArtists.2.name)]</label>
+							<icon>$INFO[Window.Property(SimiliarArtists.2.thumb)]</icon>
 							<onclick>Dialog.Close(musicinformation)</onclick>
-							<onclick>ActivateWindow(Window(10000).Property(MusicLibrary,musicdb://2/$INFO[SimiliarArtists.2.xbmc_id)]/)</onclick>
-							<visible>IntegerGreaterThan(Window(10000).Property(SimiliarArtists.Count),1)</visible>
+							<onclick>ActivateWindow(Window.Property(MusicLibrary,musicdb://2/$INFO[SimiliarArtists.2.xbmc_id)]/)</onclick>
+							<visible>IntegerGreaterThan(Window.Property(SimiliarArtists.Count),1)</visible>
 						</item>
 						<item id="3">
-							<label>$INFO[Window(10000).Property(SimiliarArtists.3.name)]</label>
-							<icon>$INFO[Window(10000).Property(SimiliarArtists.3.thumb)]</icon>
+							<label>$INFO[Window.Property(SimiliarArtists.3.name)]</label>
+							<icon>$INFO[Window.Property(SimiliarArtists.3.thumb)]</icon>
 							<onclick>Dialog.Close(musicinformation)</onclick>
-							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window(10000).Property(SimiliarArtists.3.xbmc_id)]/)</onclick>
-							<visible>IntegerGreaterThan(Window(10000).Property(SimiliarArtists.Count),2)</visible>
+							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window.Property(SimiliarArtists.3.xbmc_id)]/)</onclick>
+							<visible>IntegerGreaterThan(Window.Property(SimiliarArtists.Count),2)</visible>
 						</item>
 						<item id="4">
-							<label>$INFO[Window(10000).Property(SimiliarArtists.4.name)]</label>
-							<icon>$INFO[Window(10000).Property(SimiliarArtists.4.thumb)]</icon>
+							<label>$INFO[Window.Property(SimiliarArtists.4.name)]</label>
+							<icon>$INFO[Window.Property(SimiliarArtists.4.thumb)]</icon>
 							<onclick>Dialog.Close(musicinformation)</onclick>
 							
-							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window(10000).Property(SimiliarArtists.4.xbmc_id)]/)</onclick>
-							<visible>IntegerGreaterThan(Window(10000).Property(SimiliarArtists.Count),3)</visible>
+							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window.Property(SimiliarArtists.4.xbmc_id)]/)</onclick>
+							<visible>IntegerGreaterThan(Window.Property(SimiliarArtists.Count),3)</visible>
 						</item>
 						<item id="5">
-							<label>$INFO[Window(10000).Property(SimiliarArtists.5.name)]</label>
-							<icon>$INFO[Window(10000).Property(SimiliarArtists.5.thumb)]</icon>
+							<label>$INFO[Window.Property(SimiliarArtists.5.name)]</label>
+							<icon>$INFO[Window.Property(SimiliarArtists.5.thumb)]</icon>
 							<onclick>Dialog.Close(musicinformation)</onclick>
-							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window(10000).Property(SimiliarArtists.5.xbmc_id)]/)</onclick>
-							<visible>IntegerGreaterThan(Window(10000).Property(SimiliarArtists.Count),4)</visible>
+							<onclick>ActivateWindow(MusicLibrary,musicdb://2/$INFO[Window.Property(SimiliarArtists.5.xbmc_id)]/)</onclick>
+							<visible>IntegerGreaterThan(Window.Property(SimiliarArtists.Count),4)</visible>
 						</item>
 					</content>
 				</control>
@@ -818,7 +819,7 @@
 					<control type="button" id="9995">
 						<description>Cast/Review</description>
 						<include>ButtonInfoDialogsCommonValues</include>
-						<label>Similiar $INFO[Window(10000).Property(SimiliarArtists.Count)]</label>
+						<label>Similiar $INFO[Window.Property(SimiliarArtists.Count)]</label>
 						<onclick>SetFocus(9999)</onclick>
 					</control>
 					<control type="button" id="5">

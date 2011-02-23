@@ -84,7 +84,7 @@ def GetSimiliarInLibrary(id):
 
 def passDataToSkin(prefix, data):
     #use window properties
-    wnd = xbmcgui.Window(10000)
+    wnd = xbmcgui.Window(Window)
 
     if data != None:
         wnd.setProperty('%s.Count' % prefix, str(len(data)))
@@ -99,6 +99,7 @@ Artist_mbid = None
 AlbumName = None
 TrackTitle = None
 AdditionalParams = []
+Window = 10000
 
 for arg in sys.argv:
     if arg == 'script.ExtraMusicInfo':
@@ -118,7 +119,10 @@ for arg in sys.argv:
         
     elif param.startswith('tracktitle='):
         TrackTitle = arg[11:]
-        
+    
+    elif param.startswith('window='):
+        Window = int(arg[7:])
+    
     else:
         AdditionalParams.append(param)
         
@@ -138,22 +142,3 @@ for info in infos:
         SetMusicBrainzIDsForAllArtists(False, 'forceupdate' in AdditionalParams)
     elif info == 'updatexbmcdatabasewithartistmbid':
         SetMusicBrainzIDsForAllArtists(True, 'forceupdate' in AdditionalParams)
-    
-        '''
-        wnd = xbmcgui.WindowDialog(xbmcgui.getCurrentWindowDialogId())
-        ctrl= wnd.getControl(9999)
-        items = []
-        for art in arts:
-            if art.has_key('thumb'):
-                th =art['thumb']
-            else:
-                th = ''
-                
-                
-            path = 'Dialog.Close(musicinformation) , ActivateWindow(MusicLibrary,musicdb://2/%i/)' % int(art['id'])
-            item = xbmcgui.ListItem(art['name'], '', th, '', path)
-            item.setPath(path)
-            items.append(item)
-            
-        ctrl.setStaticContent(items)
-        '''
