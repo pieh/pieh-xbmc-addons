@@ -13,15 +13,20 @@ def GetSimiliarById(m_id):
     if len(curXMLs) > 0:
         curXML = curXMLs[0]
     else:
-        return
+        log('No <lfm> found - printing retrieved xml:')
+        print ret
+        return None
     
     curXMLs = curXML.getElementsByTagName('similarartists')
     if len(curXMLs) > 0:
         curXML = curXMLs[0]
     else:
-        return
+        log('No <similiarartists> found - printing retrieved xml:')
+        print ret
+        return None
         
     artistXMLs = curXML.getElementsByTagName('artist')
+    
     
     similiars = []
     

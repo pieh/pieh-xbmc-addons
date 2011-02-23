@@ -10,7 +10,7 @@ import os
 from MusicBrainz import GetMusicBrainzId, SetMusicBrainzIDsForAllArtists
 from BandsInTown import GetEvents
 from Lastfm import GetSimiliarById
-from Utils import log, GetStringFromUrl, GetValue, GetAttribute
+from Utils import log, GetStringFromUrl, GetValue, GetAttribute, Notify
 
 def GetXBMCArtists():
     sqlQuery = "SELECT DISTINCT artist.strArtist, song.idArtist, song.strMusicBrainzArtistID FROM song JOIN artist ON artist.idArtist=song.idArtist"
@@ -35,10 +35,10 @@ def GetThumbForArtistName(ArtistName):
     thumb = xbmc.getCacheThumbName('artist' + ArtistName)
     thumb = xbmc.translatePath("special://profile/Thumbnails/Music/Artists/%s" % thumb )
     
-    print '%s -> %s' % (ArtistName, thumb)
-    
     if not os.path.isfile(thumb):
         thumb = ''
+        
+    print '%s -> %s' % (ArtistName, thumb)
         
     return thumb
 
@@ -50,8 +50,11 @@ def GetArtists():
 
 def GetSimiliarInLibrary(id):
     simi_artists = GetSimiliarById(id)
+    if simi_artists == None:
+         Notify('Last.fm didn\'t return proper response')
+         return None
+    
     xbmc_artists = GetXBMCArtists()
-
     artists = []
     
     start = time.clock()
@@ -77,8 +80,7 @@ def GetSimiliarInLibrary(id):
     finish = time.clock()
             
     log('%i of %i artists found in last.FM is in XBMC database' % (len(artists), len(simi_artists)))
-    log('Joining xbmc library and last.fm similiar artists took %f seconds' % (finish - start))
-    xbmc.executebuiltin('Notification(Joining xbmc library and last.fm similiar artists,took %f seconds)' % (finish - start) )
+    Notify('Joining xbmc library and last.fm similiar artists', 'took %f seconds)' % (finish - start))
     
     return artists    
 
@@ -138,7 +140,6 @@ for info in infos:
         passDataToSkin('MusicEvents', events)
         
     elif info == 'updatexbmcdatabasewithartistmbidbg':
-        
         SetMusicBrainzIDsForAllArtists(False, 'forceupdate' in AdditionalParams)
     elif info == 'updatexbmcdatabasewithartistmbid':
         SetMusicBrainzIDsForAllArtists(True, 'forceupdate' in AdditionalParams)

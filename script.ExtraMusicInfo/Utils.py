@@ -1,4 +1,4 @@
-import urllib, xml.dom.minidom
+import urllib, xml.dom.minidom, xbmc
 
 def log(msg):
     print ' >> script.ExtraMusicInfo: %s' % str(msg)
@@ -22,3 +22,6 @@ def GetValue(node, tag):
 
 def GetAttribute(node, attr):
     v = unicode(node.getAttribute(tag))
+    
+def Notify(header, line='', line2='', line3=''):
+    xbmc.executebuiltin('Notification(%s,%s,%s,%s)' % (header, line, line2, line3) )

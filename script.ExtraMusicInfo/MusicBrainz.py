@@ -1,4 +1,4 @@
-import xbmc, xbmcgui, urllib, re, xml.dom.minidom
+import xbmc, xbmcgui, urllib, re, xml.dom.minidom, time
 from Utils import log, GetStringFromUrl, GetValue, GetAttribute
 
 def GetMusicBrainzId(artist):

@@ -2,7 +2,7 @@
 <addons>
 <addon id="script.ExtraMusicInfo"
        name="Extra Music Info"
-       version="0.0.1"
+       version="0.0.2"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
