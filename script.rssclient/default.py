@@ -39,6 +39,15 @@ controlListId = -1
 includeHTMLsIMG = True
 imageCachingEnabled = True
 alarmEnabled = True
+
+selectBuiltin = None
+launchIt = True
+tmpSet = None
+prefix = ''
+isWindow = True
+ForceMultiThread = False
+ID = -1
+
 ui = None
 # Current Working Directory
 CWD = os.getcwd()
@@ -184,6 +193,7 @@ def Read(sets, reader):
         if isWindow:
             if ID == -1:
                 okno = Window(xbmcgui.getCurrentWindowId())
+                print ' >> WINDOW ID = %i' % xbmcgui.getCurrentWindowId()
             else:
                 okno = Window(ID)
         else:
@@ -196,8 +206,8 @@ def Read(sets, reader):
     except:
         pass
     unread_c = 0
-    for set in self.sets:
-        self.reader.ReadSet(set, True)
+    for set in sets:
+        reader.ReadSet(set, True)
         for src in set.sources:
             for channel in src.channels:
                 unread_c += channel.unread_count
@@ -214,7 +224,7 @@ def Read(sets, reader):
     
     next_update = -1
     
-    for set in self.sets:
+    for set in sets:
         for source in set.sources:
             last_checking = time.time() - source.lastupdate
             interval = int(source.updateinterval) * 60
@@ -223,7 +233,7 @@ def Read(sets, reader):
                     for channel in src.channels:
                         unread_c -= channel.unread_count
                         
-                self.reader.ReadSource(source, False)
+                reader.ReadSource(source, False)
                 changes = True
                 for src in set.sources:
                     for channel in src.channels:
@@ -245,13 +255,14 @@ def Read(sets, reader):
 
 #items = sorted(self.items, cmp=DateCompare, reverse = self.sortdesc )
     try:
+        
         okno.setProperty( "unread_rss", str(unread_c) )
         setting_script = xbmc.translatePath('special://home/addons/script.rssclient/set_properties.py')
         okno.setProperty('SettingScript', setting_script)
         itemList = []
         
         
-        for set in self.sets:
+        for set in sets:
             for source in set.sources:
                 for channel in source.channels:
                     for item in channel.items:
@@ -263,6 +274,7 @@ def Read(sets, reader):
         for item in items:
             if c <= limit:
                 okno.setProperty('%sRSS.%d.Title' % (prefix, c), item.title)
+                
                 okno.setProperty('%sRSS.%d.Desc' % (prefix, c), cleanText(item.description))
                 
                 if len(item.image) > 0:
@@ -304,12 +316,15 @@ def Read(sets, reader):
         log('Refresh in %d minutes' % ((next_update+60)  / 60.0))
         xbmc.executebuiltin(napis)
 
-selectBuiltin = None
-launchIt = True
-tmpSet = None
-prefix = ''
-isWindow = True
-ID = -1
+class BackgroundRSSReaderReadSets(Thread):
+    def __init__(self, sets, reader):
+        Thread.__init__(self)
+        self.sets = sets
+        self.setDaemon(True)
+        self.reader = reader
+        
+    def run(self):
+        Read(self.sets, self.reader)
 
 for arg in sys.argv:
 
@@ -352,9 +367,16 @@ for arg in sys.argv:
         if 'true' in param:
             imageCachingEnabled = True
         elif 'false' in param:
-            imageCachingEnabled = False       
+            imageCachingEnabled = False
+            
+    if 'forcemultithread=' in param:
+        if 'true' in param:
+            ForceMultiThread = True
+        elif 'false' in param:
+            ForceMultiThread = False       
+           
     if param != 'script.rssclient':
-        args = args + ',' + arg    
+        args = args + ',' + arg
 
 if ( __name__ == "__main__" and launchIt):
     feedslist = RSSFeedsListLoader()
@@ -380,5 +402,11 @@ if ( __name__ == "__main__" and launchIt):
     reader.setImageCaching(imageCachingEnabled)
     reader.setIncludeHTMLimg(includeHTMLsIMG)
 
-    Read(sets, reader)
+    if ForceMultiThread:
+        bgReadSet = BackgroundRSSReaderReadSets(sets, reader)
+        bgReadSet.setDaemon(True)
+        bgReadSet.start()
+    else:
+        Read(sets, reader)
+    
     
