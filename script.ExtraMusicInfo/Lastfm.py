@@ -27,7 +27,6 @@ def GetSimiliarById(m_id):
         
     artistXMLs = curXML.getElementsByTagName('artist')
     
-    
     similiars = []
     
     for artistXML in artistXMLs:

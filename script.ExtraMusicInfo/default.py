@@ -51,7 +51,7 @@ def GetArtists():
 def GetSimiliarInLibrary(id):
     simi_artists = GetSimiliarById(id)
     if simi_artists == None:
-         Notify('Last.fm didn\'t return proper response')
+         Notify('Last.fm didn\'t return proper response - check debug log for more details')
          return None
     
     xbmc_artists = GetXBMCArtists()
