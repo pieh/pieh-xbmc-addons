@@ -1,1 +1,2 @@
+1.0.3 - removed unnecessary thread (only imagecaching is using addional background thread now)
 1.0.2 - alarm can be disabled via alarm=false

@@ -178,140 +178,131 @@ def cleanText(txt):
     p = re.compile(r'<[^<]*?/?>')
     return p.sub('', txt)
 
-class BackgroundRSSReaderReadSets(Thread):
-    
-    def __init__(self, sets, reader):
-        Thread.__init__(self)
-        self.sets = sets
-        self.setDaemon(True)
-        self.reader = reader
-
-    
-    def run(self):
-        okno = None
-        try:
-            if isWindow:
-                if ID == -1:
-                    okno = Window(xbmcgui.getCurrentWindowId())
-                else:
-                    okno = Window(ID)
+def Read(sets, reader):
+    okno = None
+    try:
+        if isWindow:
+            if ID == -1:
+                okno = Window(xbmcgui.getCurrentWindowId())
             else:
-                if ID == -1:
-                    okno = WindowDialog(xbmcgui.getCurrentWindowDialogId())
-                else:
-                    okno = WindowDialog(ID)
-                
-            okno.setProperty('RSS.count', '0');
-        except:
-            pass
-        unread_c = 0
-        for set in self.sets:
-            self.reader.ReadSet(set, True)
-            for src in set.sources:
-                for channel in src.channels:
-                    unread_c += channel.unread_count
-                    for item in channel.items:
-                        if already_read.count(item.link) > 0:
-                            item.read = True
-                        else:
-                            channel.unread_count += 1
-                            channel.read = False
+                okno = Window(ID)
+        else:
+            if ID == -1:
+                okno = WindowDialog(xbmcgui.getCurrentWindowDialogId())
+            else:
+                okno = WindowDialog(ID)
+            
+        okno.setProperty('RSS.count', '0');
+    except:
+        pass
+    unread_c = 0
+    for set in self.sets:
+        self.reader.ReadSet(set, True)
+        for src in set.sources:
+            for channel in src.channels:
+                unread_c += channel.unread_count
+                for item in channel.items:
+                    if already_read.count(item.link) > 0:
+                        item.read = True
+                    else:
+                        channel.unread_count += 1
+                        channel.read = False
 
-        log('All sets read from cache')  
-          
-        changes = False
+    log('All sets read from cache')  
+      
+    changes = False
+    
+    next_update = -1
+    
+    for set in self.sets:
+        for source in set.sources:
+            last_checking = time.time() - source.lastupdate
+            interval = int(source.updateinterval) * 60
+            if last_checking > interval:
+                for src in set.sources:
+                    for channel in src.channels:
+                        unread_c -= channel.unread_count
+                        
+                self.reader.ReadSource(source, False)
+                changes = True
+                for src in set.sources:
+                    for channel in src.channels:
+                        unread_c += channel.unread_count
+                        for item in channel.items:
+                            if already_read.count(item.link) > 0:
+                                item.read = True
+                            else:
+                                channel.unread_count += 1
+                                channel.read = False
+                
+                if next_update == -1 or interval < next_update:
+                    next_update = interval
+            elif next_update == -1 or interval - last_checking < next_update:
+                next_update = interval - last_checking
+    
+    if changes:
+        log('Sets updated from URL')    
+
+#items = sorted(self.items, cmp=DateCompare, reverse = self.sortdesc )
+    try:
+        okno.setProperty( "unread_rss", str(unread_c) )
+        setting_script = xbmc.translatePath('special://home/addons/script.rssclient/set_properties.py')
+        okno.setProperty('SettingScript', setting_script)
+        itemList = []
         
-        next_update = -1
         
         for set in self.sets:
             for source in set.sources:
-                last_checking = time.time() - source.lastupdate
-                interval = int(source.updateinterval) * 60
-                if last_checking > interval:
-                    for src in set.sources:
-                        for channel in src.channels:
-                            unread_c -= channel.unread_count
-                            
-                    self.reader.ReadSource(source, False)
-                    changes = True
-                    for src in set.sources:
-                        for channel in src.channels:
-                            unread_c += channel.unread_count
-                            for item in channel.items:
-                                if already_read.count(item.link) > 0:
-                                    item.read = True
-                                else:
-                                    channel.unread_count += 1
-                                    channel.read = False
-                    
-                    if next_update == -1 or interval < next_update:
-                        next_update = interval
-                elif next_update == -1 or interval - last_checking < next_update:
-                    next_update = interval - last_checking
+                for channel in source.channels:
+                    for item in channel.items:
+                        itemList.append(item)
         
-        if changes:
-            log('Sets updated from URL')    
+        c = 1
+        items = sorted(itemList, cmp=DateCompare, reverse = False )
+        
+        for item in items:
+            if c <= limit:
+                okno.setProperty('%sRSS.%d.Title' % (prefix, c), item.title)
+                okno.setProperty('%sRSS.%d.Desc' % (prefix, c), cleanText(item.description))
+                
+                if len(item.image) > 0:
+                    okno.setProperty('%sRSS.%d.Image' % (prefix, c), item.image[0])
+                else:
+                    okno.setProperty('%sRSS.%d.Image' % (prefix, c), '')
+                
+                okno.setProperty('%sRSS.%d.ImageCount' % (prefix, c), str(len(item.image)) )
+                
+                
+                okno.setProperty('%sRSS.%d.SlideShowable' % (prefix, c), (( (imageCachingEnabled and len(item.image) > 1) and ['true'] or ['false'])[0]))
+                okno.setProperty('%sRSS.%d.MultiImagePath' % (prefix, c), item.multiimagepath)
+                
+                i = 1
+                for image in item.image:
+                    okno.setProperty('%sRSS.%d.Image.%d' % (prefix, c,i), image)
+                    i = i + 1
+                
+                if len(item.video) > 1:
+                    okno.setProperty('%sRSS.%d.Media' % (prefix, c), item.video)
+                else:
+                    okno.setProperty('%sRSS.%d.Media' % (prefix, c), '')
+                
+                
+                okno.setProperty('%sRSS.%d.Date' % (prefix, c), item.date.replace(',', '.'))
+                
+                if item.channel != None:
+                    okno.setProperty('%sRSS.%d.Channel' % (prefix, c), item.channel.title)
 
-#items = sorted(self.items, cmp=DateCompare, reverse = self.sortdesc )
-        try:
-            okno.setProperty( "unread_rss", str(unread_c) )
-            setting_script = xbmc.translatePath('special://home/addons/script.rssclient/set_properties.py')
-            okno.setProperty('SettingScript', setting_script)
-            itemList = []
-            
-            
-            for set in self.sets:
-                for source in set.sources:
-                    for channel in source.channels:
-                        for item in channel.items:
-                            itemList.append(item)
-            
-            c = 1
-            items = sorted(itemList, cmp=DateCompare, reverse = False )
-            
-            for item in items:
-                if c <= limit:
-                    okno.setProperty('%sRSS.%d.Title' % (prefix, c), item.title)
-                    okno.setProperty('%sRSS.%d.Desc' % (prefix, c), cleanText(item.description))
-                    
-                    if len(item.image) > 0:
-                        okno.setProperty('%sRSS.%d.Image' % (prefix, c), item.image[0])
-                    else:
-                        okno.setProperty('%sRSS.%d.Image' % (prefix, c), '')
-                    
-                    okno.setProperty('%sRSS.%d.ImageCount' % (prefix, c), str(len(item.image)) )
-                    
-                    
-                    okno.setProperty('%sRSS.%d.SlideShowable' % (prefix, c), (( (imageCachingEnabled and len(item.image) > 1) and ['true'] or ['false'])[0]))
-                    okno.setProperty('%sRSS.%d.MultiImagePath' % (prefix, c), item.multiimagepath)
-                    
-                    i = 1
-                    for image in item.image:
-                        okno.setProperty('%sRSS.%d.Image.%d' % (prefix, c,i), image)
-                        i = i + 1
-                    
-                    if len(item.video) > 1:
-                        okno.setProperty('%sRSS.%d.Media' % (prefix, c), item.video)
-                    else:
-                        okno.setProperty('%sRSS.%d.Media' % (prefix, c), '')
-                    
-                    
-                    okno.setProperty('%sRSS.%d.Date' % (prefix, c), item.date.replace(',', '.'))
-                    
-                    if item.channel != None:
-                        okno.setProperty('%sRSS.%d.Channel' % (prefix, c), item.channel.title)
+                c = c + 1;
+                
+                okno.setProperty('%sRSS.count' % prefix, str(c));
+    except:
+        pass
 
-                    c = c + 1;
-                    
-                    okno.setProperty('%sRSS.count' % prefix, str(c));
-        except:
-            pass
-
-        if alarmEnabled and next_update > -1:
-            alarmhash = xbmc.getCacheThumbName(args + str(time.localtime())).replace('.tbn', '')
-            napis = 'AlarmClock(RSS_CHECK_%s,XBMC.RunScript(script.rssclient%s),%d,True)' % (alarmhash, args, ((next_update+60)  / 60.0))  
-            log('Refresh in %d minutes' % ((next_update+60)  / 60.0))
-            xbmc.executebuiltin(napis)
+    if alarmEnabled and next_update > -1:
+        alarmhash = xbmc.getCacheThumbName(args + str(time.localtime())).replace('.tbn', '')
+        napis = 'AlarmClock(RSS_CHECK_%s,XBMC.RunScript(script.rssclient%s),%d,True)' % (alarmhash, args, ((next_update+60)  / 60.0))  
+        log('Refresh in %d minutes' % ((next_update+60)  / 60.0))
+        xbmc.executebuiltin(napis)
 
 selectBuiltin = None
 launchIt = True
@@ -389,7 +380,5 @@ if ( __name__ == "__main__" and launchIt):
     reader.setImageCaching(imageCachingEnabled)
     reader.setIncludeHTMLimg(includeHTMLsIMG)
 
-    bgReadSet = BackgroundRSSReaderReadSets(sets, reader)
-    bgReadSet.setDaemon(True)
-    bgReadSet.start()
+    Read(sets, reader)
     

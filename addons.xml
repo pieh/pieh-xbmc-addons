@@ -31,7 +31,7 @@
 
 <addon id="script.rssclient"
        name="RSS Client Background"
-       version="1.0.2"
+       version="1.0.3"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
