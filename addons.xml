@@ -17,6 +17,23 @@
   </extension>
 </addon>
 
+<addon id="script.ImageCacher"
+       name="Image Cacher"
+       version="0.0.1"
+       provider-name="pieh">
+  <requires>
+    <import addon="xbmc.python" version="1.0"/>
+    <import addon="xbmcgui" />
+  </requires>
+  <extension point="xbmc.python.library"
+             library="default.py" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en"></summary>
+    <description lang="en"></description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="script.module.rssengine" name="RSS Engine Addon"
        version="1.0.2"
        provider-name="pieh">
