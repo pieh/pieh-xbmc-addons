@@ -311,13 +311,27 @@ class RSSParser:
                     self.PrepareCacheDirs(item)
                     imageCacher.enqueue(item)
                     for imageU in item.imageURLS:
-                        im = getCacheThumbName(imageU, item.multiimagepath)
-                        if not im in item.image:
-                            item.image.append(im)
+                        if self.IsNotAd(imageU):
+                            im = getCacheThumbName(imageU, item.multiimagepath)
+                            if not im in item.image:
+                                item.image.append(im)
                 elif not self.imageCachingEnabled:
                     for imageU in item.imageURLS:
-                        item.image.append(imageU)
-        
+                        if self.IsNotAd(imageU):
+                            if (not imageU in item.image):
+                                item.image.append(imageU)
+    
+    def IsNotAd(self, url):
+        try:
+            if 'feedads.' in str(url):
+                return False
+            if '.feedburner.' in  url:
+                return False
+        except ERR:
+            log(str(ERR))
+            
+        return True
+    
     def ReadMedia(self, item, string):
         retval = self.ReadYT(item, string);
         if retval == False:
