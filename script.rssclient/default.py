@@ -289,9 +289,17 @@ def Read(sets, reader):
                 okno.setProperty('%sRSS.%d.MultiImagePath' % (prefix, c), item.multiimagepath)
                 
                 i = 1
+                sep_images = ''
                 for image in item.image:
                     okno.setProperty('%sRSS.%d.Image.%d' % (prefix, c,i), image)
+                    
+                    if len(sep_images) > 0:
+                        sep_images = sep_images + ';'
+                    sep_images = sep_images + image
+                    
                     i = i + 1
+                
+                okno.setProperty('%sRSS.%d.MultiImages' % (prefix, c), sep_images)
                 
                 if len(item.video) > 1:
                     okno.setProperty('%sRSS.%d.Media' % (prefix, c), item.video)
