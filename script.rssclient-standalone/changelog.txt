@@ -1,3 +1,5 @@
-Initial version of RSS standalone client script.
+1.0.4 - fix some gui window itemgap bug
 
 1.0.3 - fixing bug with keeping script alive
+
+Initial version of RSS standalone client script.

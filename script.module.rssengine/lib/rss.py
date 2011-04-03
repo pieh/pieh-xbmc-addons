@@ -248,9 +248,10 @@ class RSSParser:
                         if len(type) > 1 and 'image/' in type:
                             url = enc.attributes['url'].nodeValue
                             item.imageURLS.append(url)
-                        if len(type) > 1 and 'video/' in type:
+                        elif len(type) > 1 and ('video/' in type or 'audio/' in type):
                             url = enc.getAttribute('url')
                             item.video = url
+                            log('audio/video1 %s' % item.video)
                     except:
                         pass
                 
@@ -261,7 +262,6 @@ class RSSParser:
                 if len(groups) > 0:
                     medias = groups[0].getElementsByTagName('media:content')
                 else:
-                    
                     medias = itemXML.getElementsByTagName('media:content')
                 
                 for media in medias:
@@ -271,6 +271,13 @@ class RSSParser:
                             curl = media.getAttribute('url')
                             item.imageURLS.append(curl)
                             break
+                        elif 'video' in type or 'audio' in type:
+                            curl = media.getAttribute('url')
+                            if not self.ReadYT(item, curl):
+                                item.video = curl
+                                
+                            log('audio/video2 %s' % item.video)
+                                
                     except:
                         try:
                             curl= media.attributes['url'].nodeValue

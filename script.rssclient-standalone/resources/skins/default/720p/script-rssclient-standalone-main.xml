@@ -193,7 +193,7 @@
 					<posy>600</posy>
 					<width>500</width>
 					<height>310</height>
-					<itemgap>250</itemgap>
+					<itemgap>0</itemgap>
 					
 					<orientation>horizontal</orientation>
 					<onup>30049</onup>
