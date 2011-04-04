@@ -4,7 +4,8 @@ def log(msg):
     print ' >> script.ExtraMusicInfo: %s' % str(msg)
     
 def GetStringFromUrl(encurl):
-    f = urllib.urlopen(  encurl  )
+    
+    f = urllib.urlopen(  encurl)
     doc = f.read()
     f.close()
     

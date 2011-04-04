@@ -23,7 +23,7 @@
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
-    <import addon="xbmcgui" />
+    <import addon="xbmcgui" version="2.11"/>
   </requires>
   <extension point="xbmc.python.library"
              library="default.py" />
@@ -35,7 +35,7 @@
 </addon>
 
 <addon id="script.module.rssengine" name="RSS Engine Addon"
-       version="1.0.2"
+       version="1.0.3"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
@@ -52,9 +52,9 @@
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
-    <import addon="xbmcgui" />
-    <import addon="script.rss.editor" />
-    <import addon="plugin.video.youtube" />
+    <import addon="xbmcgui" version="2.11"/>
+    <import addon="script.rss.editor" version="1.6.1"/>
+    <import addon="plugin.video.youtube" version="2.0.3"/>
     <import addon="script.module.rssengine" version="1.0.1" />
   </requires>
   <extension point="xbmc.python.library"
@@ -68,13 +68,13 @@
 
 <addon id="script.rssclient-standalone"
        name="RSS Client"
-       version="1.0.3"
+       version="1.0.4"
        provider-name="pieh">
   <requires>
     <import addon="xbmc.python" version="1.0"/>
-    <import addon="xbmcgui" />
-    <import addon="script.rss.editor" />
-    <import addon="plugin.video.youtube" />
+    <import addon="xbmcgui" version="2.11"/>
+    <import addon="script.rss.editor" version="1.6.1"/>
+    <import addon="plugin.video.youtube" version="2.0.3"/>
     <import addon="script.module.rssengine" version="1.0.2" />
   </requires>
   <extension point="xbmc.python.script"

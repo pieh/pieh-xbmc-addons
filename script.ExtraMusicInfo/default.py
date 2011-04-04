@@ -8,12 +8,13 @@ import xbmcplugin
 import os
 
 from MusicBrainz import GetMusicBrainzId, SetMusicBrainzIDsForAllArtists
-from BandsInTown import GetEvents
+from BandsInTown import GetEvents, GetNearEvents
 from Lastfm import GetSimiliarById
 from Utils import log, GetStringFromUrl, GetValue, GetAttribute, Notify
+import xbmcaddon
 
 def GetXBMCArtists():
-    sqlQuery = "SELECT DISTINCT artist.strArtist, song.idArtist, song.strMusicBrainzArtistID FROM song JOIN artist ON artist.idArtist=song.idArtist"
+    sqlQuery = "SELECT DISTINCT artist.strArtist, song.idArtist, song.strMusicBrainzArtistID FROM song JOIN artist ON artist.idArtist=song.idArtist ORDER BY COUNT(song.idSong) DESC"
     results = xbmc.executehttpapi( "QueryMusicDatabase(%s)" % urllib.quote_plus( sqlQuery ) )
     records = re.findall( "<record>(.+?)</record>", results, re.DOTALL )
     
@@ -42,12 +43,13 @@ def GetThumbForArtistName(ArtistName):
         
     return thumb
 
+'''
 def GetArtists():
     retval = xbmc.executeJSONRPC('{ "jsonrpc": "2.0", "method": "AudioLibrary.GetArtists", "id": 1 }')
     results = json.loads(retval)
 
     return results['result']['artists']
-
+'''
 def GetSimiliarInLibrary(id):
     simi_artists = GetSimiliarById(id)
     if simi_artists == None:
@@ -90,7 +92,9 @@ def passDataToSkin(prefix, data):
 
     if data != None:
         wnd.setProperty('%s.Count' % prefix, str(len(data)))
+        log( "%s.Count = %s" % (prefix, str(len(data)) ) )
         for (count, result) in enumerate(data):
+            log( "%s.%i = %s" % (prefix, count + 1, str(result) ) )
             for (key,value) in result.iteritems():
                 wnd.setProperty('%s.%i.%s' % (prefix, count + 1, str(key)), unicode(value))
     else:
@@ -125,19 +129,53 @@ for arg in sys.argv:
     elif param.startswith('window='):
         Window = int(arg[7:])
     
+    elif param.startswith('settuplocation'):
+        settings = xbmcaddon.Addon(id='script.ExtraMusicInfo')
+        country = settings.getSetting('country')
+        city = settings.getSetting('city')
+        
+        log('stored country/city: %s/%s' % (country, city) )  
+        
+        kb = xbmc.Keyboard('', 'Country:')
+        kb.doModal()
+        country = kb.getText()
+        
+        kb = xbmc.Keyboard('', 'City:')
+        kb.doModal()
+        city = kb.getText()
+        
+        log('country/city: %s/%s' % (country, city) )         
+        
+        settings.setSetting('location_method', 'country_city')
+        settings.setSetting('country',country)
+        settings.setSetting('city',city)
+        
+        log('done with settings')
+    
     else:
         AdditionalParams.append(param)
-        
+
+passDataToSkin('SimiliarArtists', None)
+passDataToSkin('MusicEvents', None)
+
 for info in infos:
     if info == 'similiarartistsinlibrary':
-        passDataToSkin('SimiliarArtists', None)
         artists = GetSimiliarInLibrary(Artist_mbid)
-        passDataToSkin('SimiliarArtists', artists)
+        passDataToSkin('SimiliarArtistsInLibrary', artists)
     
-    elif info == 'artistsevents':
-        passDataToSkin('MusicEvents', None)
+    elif info == 'artistevents':
         events = GetEvents(Artist_mbid)
-        passDataToSkin('MusicEvents', events)
+        passDataToSkin('ArtistEvents', events)
+    
+    elif info == 'nearevents':
+        events = GetNearEvents()
+        passDataToSkin('NearEvents', events)        
+    
+    elif info == 'topartistsnearevents':
+        artists = GetXBMCArtists()
+        
+        events = GetNearEvents(artists[0:15])
+        passDataToSkin('TopArtistsNearEvents', events)
         
     elif info == 'updatexbmcdatabasewithartistmbidbg':
         SetMusicBrainzIDsForAllArtists(False, 'forceupdate' in AdditionalParams)
