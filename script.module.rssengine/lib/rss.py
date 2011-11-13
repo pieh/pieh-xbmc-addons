@@ -2,10 +2,6 @@ import xml.dom.minidom
 from threading import Thread
 import urllib, os.path, xbmc, re, htmlentitydefs, time
 
-CWD = os.getcwd()
-if CWD[-1] == ';': CWD = CWD[0:-1]
-if CWD[-1] != '\\': CWD = CWD + '\\'
-
 DATA_PATH = xbmc.translatePath( "special://profile/addon_data/script.rssclient/")
 if not os.path.exists(DATA_PATH): os.makedirs(DATA_PATH)
 
@@ -503,7 +499,7 @@ class RSSFeedsListLoader:
         self.parseFile()
         
     def loadFile(self):
-        path = os.path.join(CWD, "../../userdata/RssFeeds.xml")
+        path = xbmc.translatePath( "special://profile/RssFeeds.xml" )
         try:
             f = open(path)
         except IOError:

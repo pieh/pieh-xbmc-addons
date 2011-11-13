@@ -49,10 +49,6 @@ ForceMultiThread = False
 ID = -1
 
 ui = None
-# Current Working Directory
-CWD = os.getcwd()
-if CWD[-1] == ';': CWD = CWD[0:-1]
-if CWD[-1] != '\\': CWD = CWD + '\\'
 
 already_read = []
 addon = xbmcaddon.Addon('script.rssclient')

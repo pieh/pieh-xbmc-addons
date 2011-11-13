@@ -41,10 +41,6 @@ addon = xbmcaddon.Addon('script.rssclient-standalone')
 includeHTMLsIMG = addon.getSetting('htmlimg') in ['true', 'True', 1]
 imageCachingEnabled = addon.getSetting('imagecaching') in ['true', 'True', 1]
 ui = None
-# Current Working Directory
-CWD = os.getcwd()
-if CWD[-1] == ';': CWD = CWD[0:-1]
-if CWD[-1] != '\\': CWD = CWD + '\\'
 
 already_read = []
 
@@ -866,8 +862,8 @@ if ( __name__ == "__main__"):
     readstatusarchiver.Load(sets)
     
     checkDir(xbmc.translatePath('special://masterprofile/Thumbnails/RSS'))
-    
-    ui = VideoGUI( "script-rssclient-standalone-main.xml", os.getcwd(), "default" )
+    path = addon.getAddonInfo('path')
+    ui = VideoGUI( "script-rssclient-standalone-main.xml", path, "default")
     ui.selectBuiltin = selectBuiltin
     ui.sets = sets
 
